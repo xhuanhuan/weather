@@ -307,7 +307,7 @@ if(j==5){
   return str_date;
 }
 //-------city store------
-var w=window.innerWidth-80;
+var w=window.innerWidth-20;
 $("#city-store").css({'width':w});
 $("#city-store").css({'height':window.innerHeight-10});
 $("#city-store").css({'left':0});
