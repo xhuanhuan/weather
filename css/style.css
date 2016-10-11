@@ -1,0 +1,78 @@
+.list-group-item{
+  color:blue;
+}
+
+#search_form{
+  margin-top:10%;
+  margin-bottom:2%;
+  margin-left:35%;
+  /*margin-right:20%;*/
+}
+#sev-wea{
+  width:100%;
+  text-align: center;
+  font-size: 18px;
+  color:white;
+  font-size:"Helvetica Neue";
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+#sev-wea th{
+  text-align: center;
+  background: rgba(0,0,0,0.1);
+  border-left: 1px solid rgba(255,255,255,0.2);
+  border-bottom-width: 0;
+}
+#sev-wea td{
+    text-align: center;
+    background: rgba(0,0,0,0.1);
+    border-left: 1px solid rgba(255,255,255,0.2);
+    border-top-width: 0;
+  }
+  #index{
+    width:100%;
+    text-align: center;
+  }
+#index td{
+  width:33.3%;
+    border-left: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+li{
+  list-style-type: none;
+}
+ul{
+  -webkit-padding-start: 0;
+}
+#line-weather{
+  background: rgba(0,0,0,0.1);
+  z-index: -1;
+}
+.sevenday{
+  width:100;
+  overflow: auto;
+}
+.today{
+  width:100%;
+  color:white;
+  background: rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+.today h1{
+font-size: 100px;
+}
+.today h4{
+font-size: 25px;
+}
+#index img{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.col-xs-12{
+  padding:0;
+}
+.t{
+  font-size: 30px;
+}

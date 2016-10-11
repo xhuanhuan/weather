@@ -1,18 +1,76 @@
 <!DOCTYPE HTML>
 <html>
 <head>
- <title>My StarNight</title>
-	<link rel="Shortcut Icon" href="icon.jpg">
+ <meta  charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>My weather test</title>
+ <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+	<!-- <link rel="Shortcut Icon" href="icon.jpg"> -->
 </head>
+<body style="font-family:	DFKai-SB;">
+ <div class="container"><!--style="width:100%;background:url('b.jpg') no-repeat;background-size:100% 100%;" -->
+  <img id="backimg" src="a.jpg" style="position:fixed;top:0;left:0" >
+  <div class="row">
 
-<body>
-<canvas id="myCanvas" style="border:1px solid #c3c3c3;background-color:black;">
-Your browser does not support the canvas element.
-</canvas>
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
+    <div id="search_form">
+        <form onsubmit="return get_jsonp();">
+            <input id="city" placeholder="请输入所要查询城市" style="background:rgba(255,255,255,0);">
+            <input class="btn btn-primary" type="submit" id="search"  value="查询" >
+          </form>
+    </div>
+    </div>
 
-<script src='js/moon.js'></script>
-<script src='js/star.js'></script>
-<script src='js/meteor.js'></script>
-<script src='js/main.js'></script>
+  <div id="homepage" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
+    <!-- <h4>今天</h4> -->
+    <div class="today">
+
+    </div>
+  </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
+      <!-- <h4>7天预报</h4> -->
+      <div class="table-responsive">
+     <table id="sev-wea" class="table">  <!--class="table" -->
+      <thead>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
+      <!-- <h4>7天气温走势</h4> -->
+      <div class="sevenday">
+      <canvas id="line-weather">
+        Your browser does not support the canvas element.
+      </canvas>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
+      <h4>指数</h4>
+      <table id="index" class="table">
+      <tr>
+        <td><ul><li style="font-size:20px;">☂</li><li id="ambrela"></li></ul></td>
+        <td><ul><li><img src="clothes.jpg" style="width:20px;"></li><li id="clothe"></li></ul></td>
+        <td><ul><li><img src="car.jpg" style="width:20px;"></li><li id="car"></li></ul></td>
+      </tr>
+      <tr>
+        <td><ul><li><img src="sun.jpg" style="width:20px;"></li><li id="sun"></li></ul></td>
+        <td><ul><li><img src="run.jpg" style="width:20px;"></li><li id="exercise"></li></ul></td>
+        <td><ul><li><img src="sunset.jpg" style="width:20px;"></li><li id="sunset"></li></ul></td>
+      </tr>
+    </table>
+    </div>
+
+</div>
+</div>
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src='js/weather.js'></script>
 </body>
 </html>
