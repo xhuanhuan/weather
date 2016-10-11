@@ -2,6 +2,12 @@ var c=document.getElementById("line-weather");
 var ctx=c.getContext("2d");
 c.width=$(".sevenday").width();
 c.height=340;
+
+var low=[];
+var high=[];
+var sk;
+var today;
+var future;
 //---------------------------
 if (window.innerWidth<767){
   c.width=800;
@@ -136,27 +142,15 @@ function get_jsonp() {
 	},
 	"error_code":0
 }
-  //  {
-      var sk = data.result.sk;
-      var today = data.result.today;
-      var future = data.result.future;
+       sk = data.result.sk;
+       today = data.result.today;
+       future = data.result.future;
 //-----今天---------
-var c=0;
-
-  for(var i in future){
-    if(c==0){
-      future[i].week="今  天";
-    }
-    c++;
-  }
-
-
-
+changetoTaday();
 //----------homepage-------------
 var strtoday="<h1>"+sk.temp+"°<span>"+today.weather+"</span></h1><h4>体感温度"+sk.temp+"°</h4><h4>湿度"+sk.humidity+" "+sk.wind_direction+sk.wind_strength+"</h4>";
 $(".today").html(strtoday);
 $(".today span").addClass('t');
-
 //-----表头-----
       var head="<tr>";
       for(var i in future){
@@ -168,16 +162,13 @@ $(".today span").addClass('t');
 //------表身------
       var bodyintro="<tr>";
       for(var i in future){
-        bodyintro+="<td><ul><li>"+future[i].weather+"</li><li>"+future[i].temperature.replace(/℃/g,'°')+"</li></ul></td>";
+        bodyintro+="<td><ul><li>"+future[i].weather+"</li><li>"+future[i].temperature.replace(/℃/g,'°').replace('~','~ ')+"</li></ul></td>";
       }
       bodyintro+="</tr>";
       $("#sev-wea tbody").html(bodyintro);
-
 //split temperature
 var lows=[];
-var low=[];
 var highs=[];
-var high=[];
 var temps=[];
 var str="";
 for(var i in future){
@@ -194,27 +185,8 @@ for(var i=0;i<7;i++){
   low[i]=lows[i];
   high[i]=  highs[i];
 }
-//------windowresize
-window.onresize=function(future,low,high){
-  $("#backimg").css({'width':window.innerWidth});
-  $("#backimg").css({'height':window.innerHeight});
-
-  if (window.innerWidth<767){
-    c.width=800;
-    drawline(future,low,high);
-    $("#search_form").css({'margin-left':'20%'});
-    $("#homepage").css({'height':window.innerHeight-80});
-    $(".today").css({'position':'absolute'});
-      $(".today").css({'bottom':'0'});
-  }else{
-  c.width=$(".sevenday").width();
-  // $("#homepage").css({'height':'auto'});
-  }
-
-}
 //-------折线----------
-drawline(future,low,high);
-
+drawline();
 //----指数------------
 $("#ambrela").html(today.weather);
 $("#clothe").html(today.dressing_advice[3]+today.dressing_advice[4]+today.dressing_advice[5]);
@@ -224,54 +196,25 @@ $("#exercise").html(today.exercise_index);
 $("#sunset").html("20:23");
 
 
-
-    //     var fut_date ="日期：";
-    //    var fut_week="星期：";
-    //   var  fut_temp="温度：";
-    //   var  fut_weather="天气：";
-    //   var  fut_wind="风力：";
-    //     var f=" ";
-    //       if(today){
-    //         for (var i in futur) {
-    //               fut_date += format(futur[i].date)+"  ";
-    //               fut_week += futur[i].week+"  ";
-    //               fut_temp += futur[i].temperature+"  ";
-    //               fut_weather += futur[i].weather+"  ";
-    //               fut_wind += futur[i].wind+"  ";
-    //             f += "" + futur[i].date + ' , ' + futur[i].week + "" +  futur[i].temperature + "" + futur[i].weather + "" + futur[i].wind + "";
-    //         }
-    //         $('#result_weather').html("<p>" + '当前:  ' + sk.temp + '℃  , ' + sk.wind_direction + sk.wind_strength + ' , ' + '空气湿度' + sk.humidity + ' , 更新时间' + sk.time + "</p><p style='padding-bottom: 10px;'>" + today.city + ' 今天是:  ' + today.date_y + ' ' + today.week + ' , ' + today.temperature+"</p>" );
-    //         $("#result_fut").html(f);
-    //
-    //         $('#d1').html("<p>"+fut_date+"</p>");
-    //         $('#d2').html(fut_week);
-    //         $('#d3').html(fut_temp);
-    //         $('#d4').html(fut_weather);
-    //         $('#d5').html(  fut_wind);
-    //
-    //     }else{
-    //         $('#result_weather').html('请输入正确的城市名！');
-    //         $("#result_fut").html('');
-    //     }
-    //
   return false;
 }
-
-function drawline(future,low,high){
+//-------------canvas-------------
+function drawline(){
+  ctx.clearRect(0,0,c.width,400);
+  //写 星期、日期
   var w=$("#line-weather").width()/7;
   var j=0;
   for(var i in future){
   ctx.fillStyle = 'white';
-  ctx.font="18px Calibri"
-  // ctx.fillText(future[i].wind,(j+0.5)*w-20,lowest);
-  ctx.fillText(future[i].week,(j+0.5)*w-18,30);
+  ctx.font="18px DFKai-SB"
+  ctx.fillText(future[i].week,(j+0.5)*w-22,30);
   ctx.fillText(format(future[i].date),(j+0.5)*w-16.5,70);
   j++;
   if(j>=7){
     j=0;
   }
   }
-
+//画圆
   for(var i=0;i<7;i++){
     ctx.strokeStyle  = 'white';
     ctx.beginPath();
@@ -287,7 +230,7 @@ function drawline(future,low,high){
     ctx.font="18px DFKai-SB";
     ctx.fillText(low[i]+'°',(i+0.5)*w-10,2000/low[i]+20);
   }
-
+//画线
   for(var i=0;i<7;i++){
     ctx.strokeStyle  = 'white';
     ctx.beginPath();
@@ -303,7 +246,7 @@ function drawline(future,low,high){
     ctx.font="18px DFKai-SB";
     ctx.fillText(high[i]+'°',(i+0.5)*w-10,3000/high[i]-20);
   }
-
+//写 风、等级
   var j=0;
   var lowest=2000/Math.min.apply(null, low)+60;
     for(var i in future){
@@ -322,7 +265,38 @@ function drawline(future,low,high){
 }
 
 
+//------windowresize--------
+window.onresize=function(){
+  $("#backimg").css({'width':window.innerWidth});
+  $("#backimg").css({'height':window.innerHeight});
 
+  if (window.innerWidth<767){
+    c.width=800;
+    $("#search_form").css({'margin-left':'20%'});
+    $("#homepage").css({'height':window.innerHeight-80});
+    $(".today").css({'position':'absolute'});
+    $(".today").css({'bottom':'0'});
+  }else{
+  c.width=$(".sevenday").width();
+  $("#search_form").css({'margin-left':'35%'});
+  $("#homepage").css({'height':'auto'});
+  $(".today").css({'position':''});
+  }
+  drawline();
+}
+
+//把当天的星期改为 “今天”
+function changetoTaday(){
+  var c=0;
+  for(var i in future){
+    if(c==0){
+      future[i].week="今  天";
+    }
+    c++;
+  }
+}
+
+//日期格式化
 var str_date="";
 function format(date){
   str_date="";
