@@ -307,16 +307,40 @@ if(j==5){
   return str_date;
 }
 //-------city store------
-var w=window.innerWidth-20;
+var w=window.innerWidth-40;
 $("#city-store").css({'width':w});
 $("#city-store").css({'height':window.innerHeight-10});
 $("#city-store").css({'left':0});
 $(".add-city").css({'width':w/3-10});
-$(".add-city").css({'height':window.innerHeight/3-10});
+$(".add-city").css({'height':window.innerHeight/4});
 $("#add").click(function(){
 $(".inputcity").show();
 });
-$("#search").click(function(){
+var count=0;
+$(".add-city").show();
+document.getElementById("search").onclick=function(){
+  if(count<9){
+    count++;
+      get_jsonp();
+      $(".box").append("<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+"<h5>"+today.temperature+"</h5><h5>"+today.weather+"</h5><h5>"+$("#city1").val()+"</h5></div>");
+      $(".mycity").addClass("alert");
+      $(".close").css({'position':'absolute'});
+      $(".close").css({'top':'0'});
+      $(".close").css({'right':'0'});
+      $(".mycity").css({'width':w/3-10});
+      $(".mycity").css({'height':window.innerHeight/4});
+      if(count==9){
+        $(".add-city").hide();
+      }
+  }else{
+    alert("最多添加 9 个城市");
+  }
+
+
+
+}
+
+$("#getback").click(function(){
    $('#city-store').animate({'left':-w},500);
 });
 
@@ -327,3 +351,6 @@ $("#getcity").click(function(){
         $('#city-store').animate({'left':0},500);
      }
 });
+// function writecityblock(){
+//    $(".box").append("<div class='mycity'><h5>"+today.temperature+"</h5><h5>"+today.weather+"</h5><h5>"+$("#city1").val()+"</h5></div>");
+// }
