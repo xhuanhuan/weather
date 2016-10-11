@@ -1,3 +1,14 @@
+var elem = document.getElementById('mySwipe');
+window.mySwipe = Swipe(elem, {
+   startSlide: 0,
+   speed: 2000,
+   auto: 0,
+   continuous: true,
+   disableScroll: false,
+   stopPropagation: false,
+  // callback: function(index, element) {},
+  // transitionEnd: function(index, element) {}
+});
 var c=document.getElementById("line-weather");
 var ctx=c.getContext("2d");
 c.width=$(".sevenday").width();
