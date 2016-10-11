@@ -312,7 +312,7 @@ $("#city-store").css({'width':w});
 $("#city-store").css({'height':window.innerHeight-10});
 $("#city-store").css({'left':0});
 $(".add-city").css({'width':w/3-10});
-$(".add-city").css({'height':w/3+10});
+$(".add-city").css({'height':window.innerHeight/3-10});
 $("#add").click(function(){
 $(".inputcity").show();
 });
