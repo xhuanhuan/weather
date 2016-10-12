@@ -1,10 +1,9 @@
-
 window.mySwipe = new Swipe(document.getElementById('slider'), {
   startSlide: 0,
   speed: 400,
   auto: 0,
   draggable: false,
-  continuous: true,
+  continuous: false,
   disableScroll: false,
   stopPropagation: false,
   callback: function(index, elem) {},
