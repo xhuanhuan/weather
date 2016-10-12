@@ -25,7 +25,7 @@
   margin-left:35%;
   /*margin-right:20%;*/
 }
-#sev-wea{
+.sev-wea{
   width:100%;
   text-align: center;
   font-size: 18px;
@@ -34,29 +34,29 @@
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
 }
-#sev-wea th{
+.sev-wea th{
   text-align: center;
   background: rgba(0,0,0,0.1);
   border-left: 1px solid rgba(255,255,255,0.2);
   border-bottom-width: 0;
 }
-#sev-wea td{
+.sev-wea td{
     text-align: center;
     background: rgba(0,0,0,0.1);
     border-left: 1px solid rgba(255,255,255,0.2);
     border-top-width: 0;
   }
-  #sev-wea th:first-child{
+  .sev-wea th:first-child{
     border-left-width: 0;
   }
-  #sev-wea td:first-child{
+  .sev-wea td:first-child{
     border-left-width: 0;
   }
-  #index{
+  .index{
     width:100%;
     text-align: center;
   }
-#index td{
+.index td{
   width:33.3%;
     border-left: 1px solid rgba(255,255,255,0.2);
     border-right: 1px solid rgba(255,255,255,0.2);
@@ -69,7 +69,7 @@ li{
 ul{
   -webkit-padding-start: 0;
 }
-#line-weather{
+.line-weather{
   background: rgba(0,0,0,0.1);
   z-index: 9999;
 }
@@ -88,6 +88,9 @@ ul{
   display:none;
   float:right;
 }
+.homepage{
+position: relative;
+}
 
 .today{
   width:100%;
@@ -103,7 +106,7 @@ font-size: 100px;
 .today h4{
 font-size: 25px;
 }
-#index img{
+.index img{
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -140,7 +143,7 @@ font-size: 25px;
   border: 3px dotted #d0d0d0;
   text-align:center;
   padding-top:60px;
-  margin:4px;
+  margin:5px;
 }
 .mycity{
   width:50px;
@@ -148,7 +151,7 @@ font-size: 25px;
   /*border: 3px dotted #d0d0d0;*/
   background-color: #f0f0f0;
   text-align:center;
-  margin:4px;
+  margin:5px;
   position:relative;
 }
 .alert{
