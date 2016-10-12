@@ -116,8 +116,6 @@ font-size: 25px;
   display:flex;
   flex-flow:wrap;
   justify-content:flex-start;
-  margin-top: 10px;
-  padding-top:10px;
 }
 .add-city{
   width:50px;
@@ -125,26 +123,37 @@ font-size: 25px;
   border: 3px dotted #d0d0d0;
   text-align:center;
   padding-top:60px;
-  margin:5px;
+  margin:4px;
 }
 .mycity{
   width:50px;
   height:70px;
-  border: 3px dotted #d0d0d0;
+  /*border: 3px dotted #d0d0d0;*/
+  background-color: #f0f0f0;
   text-align:center;
-  margin:5px;
+  margin:4px;
   position:relative;
+}
+.alert{
+  padding:0;
+  padding-top: 15px;
 }
 .inputcity{
   float:right;
   display: none;
 }
 .close{
+  /*font-size: 25px;*/
   color:white;
   background-color: red;
   border-radius:100%;
 }
-
+.title{
+padding-top:15px;
+font-size:20px;
+width:100%;
+border-top:1px solid #d0d0d0;
+}
 
 
 
