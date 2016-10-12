@@ -356,6 +356,7 @@ document.getElementById("search").onclick=function(){
       $(".close").css({'right':'-10px'});
       $(".mycity").css({'width':w/3-10});
       $(".mycity").css({'height':window.innerHeight/4});
+      $("#homecity").clone().attr('id','city'+count).appendTo($('.swipe-wrap'));
       if(count==9){
         $(".add-city").hide();
       }

@@ -10,107 +10,96 @@
 	<!-- <link rel="Shortcut Icon" href="icon.jpg"> -->
 </head>
 <body style="font-family:	DFKai-SB;">
-  <h1 style='display:none'>xiaobo and xiaohuan's test</h1>
   <img id="backimg" src="a.jpg" style="position:fixed;top:0;left:0;" >
-  <div id="slider" class="swipe">
-    <div class="swipe-wrap">
-      <div>
- <div class="container"><!--style="width:100%;background:url('b.jpg') no-repeat;background-size:100% 100%;" -->
-   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-     <div class="container-fluid">
-      <div class="navbar-header">
-        <button id="getcity">
-              <span class="glyphicon glyphicon-plus" style="font-size:25px;"></span>
-        </button>
-          <a class="navbar-brand" href="#">天气预报</a>
-      </div>
-      <div class="collapse navbar-collapse">
-          <form class="navbar-form navbar-right" onsubmit="return get_jsonp();">
-              <div class="form-group">
-                  <input id="city" type="text" class="form-control" placeholder="请输入所要查询城市">
-              </div>
-              <button type="submit" class="btn btn-primary">提交</button>
-          </form>
-      </div>
-      </div>
-   </nav>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+     <div class="navbar-header">
+       <button id="getcity">
+             <span class="glyphicon glyphicon-plus" style="font-size:25px;"></span>
+       </button>
+         <a class="navbar-brand" href="#">天气预报</a>
+     </div>
+     <div class="collapse navbar-collapse">
+         <form class="navbar-form navbar-right" onsubmit="return get_jsonp();">
+             <div class="form-group">
+                 <input id="city" type="text" class="form-control" placeholder="请输入所要查询城市">
+             </div>
+             <button type="submit" class="btn btn-primary">提交</button>
+         </form>
+     </div>
+     </div>
+  </nav>
 <div id="city-store">
-  <div style="height:49px;border-bottom:1px solid #d0d0d0;padding-top:5px;">
-  <button class="btn btn-default" id="getback"><span class="glyphicon glyphicon-chevron-left"></span></button>
-  <form class="inputcity" onsubmit="return false;">
-  <input style="overflow:hidden;height:40px;width:65%;" id="city1" type="text" placeholder="请输入查询城市">
-  <button style="height:40px;" type="submit" id="search" >提交</button>
-  </form>
+ <div style="height:49px;border-bottom:1px solid #d0d0d0;padding-top:5px;">
+ <button class="btn btn-default" id="getback"><span class="glyphicon glyphicon-chevron-left"></span></button>
+ <form class="inputcity" onsubmit="return false;">
+ <input style="overflow:hidden;height:40px;width:65%;" id="city1" type="text" placeholder="请输入查询城市">
+ <button style="height:40px;" type="submit" id="search" >提交</button>
+ </form>
+ </div>
+
+ <div class="box">
+  <div class="add-city">
+    <span id="add" class="glyphicon glyphicon-plus" style="color:#d0d0d0;font-size:25px;"></span>
   </div>
 
-  <div class="box">
-   <div class="add-city">
-     <span id="add" class="glyphicon glyphicon-plus" style="color:#d0d0d0;font-size:25px;"></span>
-   </div>
-
-  </div>
+ </div>
 
 </div>
 
-  <div class="row">
-    <!-- <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
-    <div id="search_form">
-        <form onsubmit="return get_jsonp();">
-            <input id="city" placeholder="请输入所要查询城市" style="background:rgba(255,255,255,0);">
-            <input class="btn btn-primary" type="submit" id="search"  value="查询" >
-          </form>
-    </div>
-    </div> -->
-  <div id="homepage" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
-    <!-- <h4>今天</h4> -->
-    <div class="today">
-    </div>
-  </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
-      <!-- <h4>7天预报</h4> -->
-      <div class="table-responsive">
-     <table id="sev-wea" class="table">  <!--class="table" -->
-      <thead>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-    </div>
-    </div>
+<div id="slider" class="swipe">
+  <div class="swipe-wrap">
+  <div id = 'homecity'>
+   <div class="container">
 
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
-      <!-- <h4>7天气温走势</h4> -->
-      <div class="sevenday">
-      <canvas id="line-weather">
-        Your browser does not support the canvas element.
-      </canvas>
+    <div class="row">
+    <div id="homepage" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
+      <div class="today">
       </div>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
-      <h4>指数</h4>
-      <table id="index" class="table">
-      <tr>
-        <td><ul><li style="font-size:20px;">☂</li><li id="ambrela"></li></ul></td>
-        <td><ul><li><img src="clothes.jpg" style="width:20px;"></li><li id="clothe"></li></ul></td>
-        <td><ul><li><img src="car.jpg" style="width:20px;"></li><li id="car"></li></ul></td>
-      </tr>
-      <tr>
-        <td><ul><li><img src="sun.jpg" style="width:20px;"></li><li id="sun"></li></ul></td>
-        <td><ul><li><img src="run.jpg" style="width:20px;"></li><li id="exercise"></li></ul></td>
-        <td><ul><li><img src="sunset.jpg" style="width:20px;"></li><li id="sunset"></li></ul></td>
-      </tr>
-    </table>
-    </div>
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
+       <table id="sev-wea" class="table">
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      </div>
 
-</div>
-</div>
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
+        <!-- <h4>7天气温走势</h4> -->
+        <div class="sevenday">
+        <canvas id="line-weather">
+          Your browser does not support the canvas element.
+        </canvas>
+        </div>
+      </div>
 
-</div>
-<div><b>1</b></div>
-    <div><b>2</b></div>
-    <div><b>3</b></div>
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
+        <h4>指数</h4>
+        <table id="index" class="table">
+        <tr>
+          <td><ul><li style="font-size:20px;">☂</li><li id="ambrela"></li></ul></td>
+          <td><ul><li><img src="clothes.jpg" style="width:20px;"></li><li id="clothe"></li></ul></td>
+          <td><ul><li><img src="car.jpg" style="width:20px;"></li><li id="car"></li></ul></td>
+        </tr>
+        <tr>
+          <td><ul><li><img src="sun.jpg" style="width:20px;"></li><li id="sun"></li></ul></td>
+          <td><ul><li><img src="run.jpg" style="width:20px;"></li><li id="exercise"></li></ul></td>
+          <td><ul><li><img src="sunset.jpg" style="width:20px;"></li><li id="sunset"></li></ul></td>
+        </tr>
+      </table>
+      </div>
+
+  </div>
+  </div>
+
+  </div>
+  <!-- <div id = 'city2'>1jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj</div>
+  <div id = 'city3'>2jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj</div>
+  <div id = 'city4'>3jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj</div> -->
 </div>
 </div>
 <script src="js/jquery-1.12.3.min.js"></script>
