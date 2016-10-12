@@ -11,26 +11,29 @@
 </head>
 <body style="font-family:	DFKai-SB;">
   <h1 style='display:none'>xiaobo and xiaohuan's test</h1>
+  <img id="backimg" src="a.jpg" style="position:fixed;top:0;left:0;" >
+  <div id="slider" class="swipe">
+    <div class="swipe-wrap">
+      <div>
  <div class="container"><!--style="width:100%;background:url('b.jpg') no-repeat;background-size:100% 100%;" -->
-  <img id="backimg" src="a.jpg" style="position:fixed;top:0;left:0" >
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
-   <div class="navbar-header">
-     <button id="getcity">
-           <span class="glyphicon glyphicon-plus" style="font-size:25px;"></span>
-     </button>
-       <a class="navbar-brand" href="#">天气预报</a>
-   </div>
-   <div class="collapse navbar-collapse">
-       <form class="navbar-form navbar-right" onsubmit="return get_jsonp();">
-           <div class="form-group">
-               <input id="city" type="text" class="form-control" placeholder="请输入所要查询城市">
-           </div>
-           <button type="submit" class="btn btn-primary">提交</button>
-       </form>
-   </div>
-   </div>
-</nav>
+   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+     <div class="container-fluid">
+      <div class="navbar-header">
+        <button id="getcity">
+              <span class="glyphicon glyphicon-plus" style="font-size:25px;"></span>
+        </button>
+          <a class="navbar-brand" href="#">天气预报</a>
+      </div>
+      <div class="collapse navbar-collapse">
+          <form class="navbar-form navbar-right" onsubmit="return get_jsonp();">
+              <div class="form-group">
+                  <input id="city" type="text" class="form-control" placeholder="请输入所要查询城市">
+              </div>
+              <button type="submit" class="btn btn-primary">提交</button>
+          </form>
+      </div>
+      </div>
+   </nav>
 <div id="city-store">
   <div style="height:49px;border-bottom:1px solid #d0d0d0;padding-top:5px;">
   <button class="btn btn-default" id="getback"><span class="glyphicon glyphicon-chevron-left"></span></button>
@@ -103,8 +106,16 @@
 
 </div>
 </div>
+
+</div>
+<div><b>1</b></div>
+    <div><b>2</b></div>
+    <div><b>3</b></div>
+</div>
+</div>
 <script src="js/jquery-1.12.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src='js/swipe.js'></script>
 <script src='js/weather.js'></script>
 </body>
 </html>
