@@ -2,7 +2,7 @@
 window.mySwipe = new Swipe(document.getElementById('slider'), {
   startSlide: 0,
   speed: 400,
-  auto: 3000,
+  auto: 0,
   draggable: false,
   continuous: true,
   disableScroll: false,
