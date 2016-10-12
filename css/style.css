@@ -1,7 +1,24 @@
+/*for swipe style*/
+.swipe {
+  overflow: hidden;
+  visibility: hidden;
+  position: relative;
+}
+.swipe-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.swipe-wrap > div {
+  float:left;
+  width:100%;
+  position: relative;
+  overflow: hidden;
+}
+/*above for swipe*/
+
 .list-group-item{
   color:blue;
 }
-
 #search_form{
   margin-top:10%;
   margin-bottom:2%;
@@ -54,7 +71,7 @@ ul{
 }
 #line-weather{
   background: rgba(0,0,0,0.1);
-  z-index: -1;
+  z-index: 9999;
 }
 .sevenday{
   width:100;

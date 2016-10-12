@@ -1,7 +1,18 @@
+window.mySwipe = new Swipe(document.getElementById('slider'), {
+  startSlide: 0,
+  speed: 400,
+  auto: 0,
+  draggable: false,
+  continuous: false,
+  disableScroll: false,
+  stopPropagation: false,
+  callback: function(index, elem) {},
+  transitionEnd: function(index, elem) {}
+});
 var c=document.getElementById("line-weather");
 var ctx=c.getContext("2d");
 c.width=$(".sevenday").width();
-c.height=340;
+c.height=300;
 
 var low=[];
 var high=[];
@@ -10,7 +21,7 @@ var today;
 var future;
 //---------------------------
 if (window.innerWidth<767){
-  c.width=800;
+  c.width=$(".sevenday").width();
   $("#search_form").css({'margin-left':'20%'});
   $("#homepage").css({'height':window.innerHeight-80});
   $(".today").css({'position':'absolute','bottom':'0'});
@@ -200,63 +211,73 @@ $("#sunset").html("20:23");
 }
 //-------------canvas-------------
 function drawline(){
-  ctx.clearRect(0,0,c.width,400);
+  ctx.clearRect(0,0,c.width,c.height);
   //写 星期、日期
   var w=$("#line-weather").width()/7;
   var j=0;
   for(var i in future){
   ctx.fillStyle = 'white';
-  ctx.font="18px DFKai-SB"
-  ctx.fillText(future[i].week,(j+0.5)*w-22,30);
-  ctx.fillText(format(future[i].date),(j+0.5)*w-16.5,70);
+  ctx.font="15px DFKai-SB"
+  ctx.fillText(future[i].week,(j+0.5)*w-22,20);
+  ctx.fillText(format(future[i].date),(j+0.5)*w-16.5,50);
   j++;
   if(j>=7){
     j=0;
   }
   }
 //画圆
+  // console.log(low);
+  // console.log(high);
+  var max = Math.max.apply(null,high) >= Math.max.apply(null,low)? Math.max.apply(null,high)+2 : Math.max.apply(null,low)+2;
+  var min = Math.min.apply(null,high) <= Math.min.apply(null,low)? Math.min.apply(null,low)-2 : Math.min.apply(null,low)-2;
+  // console.log(max);
+  // console.log(min);
   for(var i=0;i<7;i++){
     ctx.strokeStyle  = 'white';
     ctx.beginPath();
-    ctx.arc((i+0.5)*w,2000/low[i],2, 0, 2 * Math.PI);
+    temp1 = low[i];
+    temp2 = low[i-1];
+    ctx.arc((i+0.5)*w,(max - temp1)/(max - min)*150+70,2, 0, 2 * Math.PI);
     if(i!=0){
-      ctx.moveTo((i-0.5)*w,2000/low[i-1]);
-      ctx.lineTo((i+0.5)*w,2000/low[i]);
+      ctx.moveTo((i-0.5)*w,(max - temp2)/(max - min)*150+70);
+      ctx.lineTo((i+0.5)*w,(max - temp1)/(max - min)*150+70);
       ctx.stroke();
     }
   	ctx.closePath();
   	ctx.fillStyle = 'white';
     ctx.fill();
-    ctx.font="18px DFKai-SB";
-    ctx.fillText(low[i]+'°',(i+0.5)*w-10,2000/low[i]+20);
+    ctx.font="15px DFKai-SB";
+    ctx.fillText(low[i]+'°',(i+0.5)*w-10,(max - temp1)/(max - min)*150+70+20);
   }
 //画线
   for(var i=0;i<7;i++){
     ctx.strokeStyle  = 'white';
     ctx.beginPath();
-  	ctx.arc((i+0.5)*w,3000/high[i]-10,2, 0, 2 * Math.PI);
+    temp1 = high[i];
+    temp2 = high[i-1];
+  	ctx.arc((i+0.5)*w,(max - temp1)/(max - min)*150+70,2, 0, 2 * Math.PI);
     if(i!=0){
-      ctx.moveTo((i-0.5)*w,3000/high[i-1]-10);
-      ctx.lineTo((i+0.5)*w,3000/high[i]-10);
+      ctx.moveTo((i-0.5)*w,(max - temp2)/(max - min)*150+70);
+      ctx.lineTo((i+0.5)*w,(max - temp1)/(max - min)*150+70);
       ctx.stroke();
     }
   	ctx.closePath();
   	ctx.fillStyle = 'white';
     ctx.fill();
-    ctx.font="18px DFKai-SB";
-    ctx.fillText(high[i]+'°',(i+0.5)*w-10,3000/high[i]-20);
+    ctx.font="15px DFKai-SB";
+    ctx.fillText(high[i]+'°',(i+0.5)*w-10,(max - temp1)/(max - min)*150+70-10);
   }
 //写 风、等级
   var j=0;
-  var lowest=2000/Math.min.apply(null, low)+60;
+  var lowest=150+100;
     for(var i in future){
     ctx.fillStyle = 'white';
-    ctx.font="18px DFKai-SB"
+    ctx.font="15px DFKai-SB"
     var index=future[i].wind.indexOf("风");
 
     ctx.fillText(future[i].weather,(j+0.5)*w-5,lowest);
-    ctx.fillText(future[i].wind.slice(0,index+1),(j+0.5)*w-20,lowest+40);
-    ctx.fillText(future[i].wind.slice(index+1),(j+0.5)*w-30,lowest+80);
+    ctx.fillText(future[i].wind.slice(0,index+1),(j+0.5)*w-20,lowest+20);
+    ctx.fillText(future[i].wind.slice(index+1),(j+0.5)*w-18,lowest+40);
     j++;
     if(j>=7){
       j=0;
