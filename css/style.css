@@ -71,7 +71,7 @@ ul{
 }
 #line-weather{
   background: rgba(0,0,0,0.1);
-  z-index: -1;
+  z-index: 9999;
 }
 .sevenday{
   width:100;
