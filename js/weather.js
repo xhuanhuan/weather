@@ -9,7 +9,7 @@ window.mySwipe = new Swipe(document.getElementById('slider'), {
   callback: function(index, elem) {},
   transitionEnd: function(index, elem) {}
 });
-var c=document.getElementById("line-weather");
+var c=document.getElementsByClassName("line-weather")[0];
 var ctx=c.getContext("2d");
 c.width=$(".sevenday").width();
 c.height=300;
@@ -23,7 +23,7 @@ var future;
 if (window.innerWidth<767){
   c.width=$(".sevenday").width();
   $("#search_form").css({'margin-left':'20%'});
-  $("#homepage").css({'height':window.innerHeight-80});
+  $(".homepage").css({'height':window.innerHeight-80});
   $(".today").css({'position':'absolute','bottom':'0'});
 
 }
@@ -168,7 +168,7 @@ $(".today span").addClass('t');
         head+="<th><ul><li>"+future[i].week+"</li><li>"+format(future[i].date)+"</li></ul></th>";
       }
       head+="</tr>";
-      $("#sev-wea thead").html(head);
+      $(".sev-wea thead").html(head);
       // $("#sev-wea thead th li:first").html("今天");
 //------表身------
       var bodyintro="<tr>";
@@ -176,7 +176,7 @@ $(".today span").addClass('t');
         bodyintro+="<td><ul><li>"+future[i].weather+"</li><li>"+future[i].temperature.replace(/℃/g,'°').replace('~','~ ')+"</li></ul></td>";
       }
       bodyintro+="</tr>";
-      $("#sev-wea tbody").html(bodyintro);
+      $(".sev-wea tbody").html(bodyintro);
 //split temperature
 var lows=[];
 var highs=[];
@@ -199,12 +199,12 @@ for(var i=0;i<7;i++){
 //-------折线----------
 drawline();
 //----指数------------
-$("#ambrela").html(today.weather);
-$("#clothe").html(today.dressing_advice[3]+today.dressing_advice[4]+today.dressing_advice[5]);
-$("#car").html(today.wash_index);
-$("#sun").html(today.uv_index);
-$("#exercise").html(today.exercise_index);
-$("#sunset").html("20:23");
+$(".ambrela").html(today.weather);
+$(".clothe").html(today.dressing_advice[3]+today.dressing_advice[4]+today.dressing_advice[5]);
+$(".car").html(today.wash_index);
+$(".sun").html(today.uv_index);
+$(".exercise").html(today.exercise_index);
+$(".sunset").html("20:23");
 
 
   return false;
@@ -213,7 +213,7 @@ $("#sunset").html("20:23");
 function drawline(){
   ctx.clearRect(0,0,c.width,c.height);
   //写 星期、日期
-  var w=$("#line-weather").width()/7;
+  var w=$(".line-weather").width()/7;
   var j=0;
   for(var i in future){
   ctx.fillStyle = 'white';
@@ -292,13 +292,13 @@ window.onresize=function(){
   if (window.innerWidth<767){
     c.width=800;
     $("#search_form").css({'margin-left':'20%'});
-    $("#homepage").css({'height':window.innerHeight-80});
+    $(".homepage").css({'height':window.innerHeight-80});
     $(".today").css({'position':'absolute'});
     $(".today").css({'bottom':'0'});
   }else{
   c.width=$(".sevenday").width();
   $("#search_form").css({'margin-left':'35%'});
-  $("#homepage").css({'height':'auto'});
+  $(".homepage").css({'height':'auto'});
   $(".today").css({'position':''});
   }
   drawline();
