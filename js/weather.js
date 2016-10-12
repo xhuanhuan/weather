@@ -331,8 +331,9 @@ document.getElementById("search").onclick=function(){
       $(".box p").addClass("title");
       $(".mycity").addClass("alert");
       $(".close").css({'position':'absolute'});
-      $(".close").css({'top':'-10px'});
-      $(".close").css({'right':'-10px'});
+      $(".close").css({'top':'-5px'});
+      $(".close").css({'right':'-5px'});
+      // $(".close").hide();
       $(".mycity").css({'width':w/3-10});
       $(".mycity").css({'height':window.innerHeight/4});
       if(count==9){

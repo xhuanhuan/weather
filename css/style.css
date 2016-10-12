@@ -123,7 +123,7 @@ font-size: 25px;
   border: 3px dotted #d0d0d0;
   text-align:center;
   padding-top:60px;
-  margin:4px;
+  margin:5px;
 }
 .mycity{
   width:50px;
@@ -131,7 +131,7 @@ font-size: 25px;
   /*border: 3px dotted #d0d0d0;*/
   background-color: #f0f0f0;
   text-align:center;
-  margin:4px;
+  margin:5px;
   position:relative;
 }
 .alert{
