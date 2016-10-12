@@ -318,15 +318,19 @@ $(".inputcity").show();
 });
 var count=0;
 $(".add-city").show();
+document.getElementsByClassName("close").onclick=function(){
+  count=count-1;
+  console.log(count);
+}
 document.getElementById("search").onclick=function(){
   if(count<9){
-    count++;
       get_jsonp();
-      $(".box").append("<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+"<h5>"+today.temperature+"</h5><h5>"+today.weather+"</h5><h5>"+$("#city1").val()+"</h5></div>");
+      $(".box").append("<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert' onclick = 'del()'>&times;</a>"+"<h5>"+today.temperature+"</h5><h5>"+today.weather+"</h5><h5>"+$("#city1").val()+"</h5></div>");
+      count++;
       $(".mycity").addClass("alert");
       $(".close").css({'position':'absolute'});
-      $(".close").css({'top':'0'});
-      $(".close").css({'right':'0'});
+      $(".close").css({'top':'-10px'});
+      $(".close").css({'right':'-10px'});
       $(".mycity").css({'width':w/3-10});
       $(".mycity").css({'height':window.innerHeight/4});
       if(count==9){
@@ -335,10 +339,16 @@ document.getElementById("search").onclick=function(){
   }else{
     alert("最多添加 9 个城市");
   }
-
-
-
+  $(".inputcity").hide();
 }
+
+function del() {
+  count=count-1;
+  if(count<9){
+    $(".add-city").show();
+  }
+}
+
 
 $("#getback").click(function(){
    $('#city-store').animate({'left':-w},500);

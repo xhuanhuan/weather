@@ -140,7 +140,9 @@ font-size: 25px;
   display: none;
 }
 .close{
-  color:red;
+  color:white;
+  background-color: red;
+  border-radius:100%;
 }
 
 
