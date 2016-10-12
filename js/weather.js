@@ -328,12 +328,13 @@ if(j==5){
   return str_date;
 }
 //-------city store------
-var w=window.innerWidth-40;
+var w=window.innerWidth+1;
 $("#city-store").css({'width':w});
 $("#city-store").css({'height':window.innerHeight-10});
 $("#city-store").css({'left':0});
 $(".add-city").css({'width':w/3-10});
 $(".add-city").css({'height':window.innerHeight/4});
+// $(".box").css({'height':window.innerHeight-60});
 $("#add").click(function(){
 $(".inputcity").show();
 });
@@ -346,8 +347,9 @@ document.getElementsByClassName("close").onclick=function(){
 document.getElementById("search").onclick=function(){
   if(count<9){
       get_jsonp();
-      $(".box").append("<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert' onclick = 'del()'>&times;</a>"+"<h5>"+today.temperature+"</h5><h5>"+today.weather+"</h5><h5>"+$("#city1").val()+"</h5></div>");
+      $(".box").append("<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert' onclick = 'del()'>&times;</a>"+"<h4>"+high[0]+"°C</h4><h4>"+low[0]+"°C</h4><h4>"+today.weather+"</h4><p>"+$("#city1").val()+"</p></div>");
       count++;
+      $(".box p").addClass("title");
       $(".mycity").addClass("alert");
       $(".close").css({'position':'absolute'});
       $(".close").css({'top':'-10px'});
