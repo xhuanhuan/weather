@@ -12,13 +12,13 @@
   float:left;
   width:100%;
   position: relative;
+  overflow: hidden;
 }
 /*above for swipe*/
 
 .list-group-item{
   color:blue;
 }
-
 #search_form{
   margin-top:10%;
   margin-bottom:2%;
