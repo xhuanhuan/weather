@@ -1,40 +1,89 @@
-window.mySwipe = new Swipe(document.getElementById('slider'), {
-  startSlide: 0,
-  speed: 400,
-  auto: 0,
-  draggable: false,
-  continuous: false,
-  disableScroll: false,
-  stopPropagation: false,
-  callback: function(index, elem) {},
-  transitionEnd: function(index, elem) {}
-});
-var c=document.getElementsByClassName("line-weather")[0];
-var ctx=c.getContext("2d");
-c.width=$(".sevenday").width();
-c.height=300;
+var city_moban =
+    '<div>'+
+    '<div class="container">'+
+      '<div class="row">' +
+'<div class="homepage" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">'+
+'<div class="today">'+'</div></div>'+
+'<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">'+
+'<div class="table-responsive">'+
+'<table class="sev-wea" class="table">'+
+'<thead></thead><tbody></tbody></table></div></div>'+
+'<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">'+
+'<div class="sevenday">'+
+'<canvas draw-index = "0" class="line-weather">'+'Your browser does not support the canvas element.</canvas></div></div>'+
+'<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">'+
+'<h4>指数</h4>'+
+'<table class="table index"><tr>'+
+  '<td><ul><li style="font-size:20px;">☂</li><li class="ambrela"></li></ul></td>'+
+  '<td><ul><li><img src="clothes.jpg" style="width:20px;"></li><li class="clothe"></li></ul></td>'+
+  '<td><ul><li><img src="car.jpg" style="width:20px;"></li><li class="car"></li></ul></td></tr><tr>'+
+  '<td><ul><li><img src="sun.jpg" style="width:20px;"></li><li class="sun"></li></ul></td>'+
+  '<td><ul><li><img src="run.jpg" style="width:20px;"></li><li class="exercise"></li></ul></td>'+
+  '<td><ul><li><img src="sunset.jpg" style="width:20px;"></li><li class="sunset"></li></ul></td>'+'</tr></table></div></div></div></div>'
+//---------------------------
 
 var low=[];
 var high=[];
 var sk;
 var today;
 var future;
-//---------------------------
+var count = 0;
+addCity();
+responseToscreen();
+
+function responseToscreen(){
 if (window.innerWidth<767){
-  c.width=$(".sevenday").width();
-  $("#search_form").css({'margin-left':'20%'});
+  //$("#search_form").css({'margin-left':'20%'});
   $(".homepage").css({'height':window.innerHeight-80});
   $(".today").css({'position':'absolute','bottom':'0'});
-
 }
 $("#backimg").css({'width':window.innerWidth});
 $("#backimg").css({'height':window.innerHeight});
+}
 
-//-----------
+//增加城市
+function addCity(){
+  if(count<9){
+      $('.swipe-wrap').append(city_moban);
+      c=document.getElementsByClassName("line-weather")[count];
+      ctx=c.getContext("2d");
+      c.width=$(".sevenday").width();
+      c.height=300;
+      get_jsonp();
+      $(".box").append("<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert' onclick = 'del()'>&times;</a>"+"<h4>"+high[0]+"°C</h4><h4>"+low[0]+"°C</h4><h4>"+today.weather+"</h4><p>"+$("#city1").val()+"</p></div>");
+      count++;
+      $(".mycity").css({'width':window.innerWidth/3-10});
+      $(".mycity").css({'height':window.innerHeight/4});
+      $(".box p").addClass("title");
+      $(".mycity").addClass("alert");
+      console.log('hello');
+      $(".close").css({'position':'absolute'});
+      $(".close").css({'top':'-5px'});
+      $(".close").css({'right':'-5px'});
+      // $(".close").hide();
+      window.mySwipe = new Swipe(document.getElementById('slider'), {
+        startSlide: 0,
+        speed: 400,
+        auto: 0,
+        draggable: false,
+        continuous: false,
+        disableScroll: false,
+        stopPropagation: false,
+        callback: function(index, elem) {},
+        transitionEnd: function(index, elem) {}
+      });
+      if(count==9){
+        $(".add-city").hide();
+      }
+  }else{
+    alert("最多添加 9 个城市");
+  }
+}
+
+//-----------获取数据并写入DOM
 function get_jsonp() {
     $("#result_fut").html('');
     $('#result_weather').html('正在查询中……');
-
     // $.getJSON("http://v.juhe.cn/weather/index?callback=?", {
     //     "cityname" : $("#city").val(),
     //     "dtype" : "jsonp",
@@ -290,14 +339,14 @@ window.onresize=function(){
   $("#backimg").css({'height':window.innerHeight});
 
   if (window.innerWidth<767){
-    c.width=800;
-    $("#search_form").css({'margin-left':'20%'});
+    c.width=$(".sevenday").width();
+    //$("#search_form").css({'margin-left':'20%'});
     $(".homepage").css({'height':window.innerHeight-80});
     $(".today").css({'position':'absolute'});
     $(".today").css({'bottom':'0'});
   }else{
   c.width=$(".sevenday").width();
-  $("#search_form").css({'margin-left':'35%'});
+  //$("#search_form").css({'margin-left':'35%'});
   $(".homepage").css({'height':'auto'});
   $(".today").css({'position':''});
   }
@@ -345,7 +394,20 @@ document.getElementsByClassName("close").onclick=function(){
   console.log(count);
 }
 document.getElementById("search").onclick=function(){
-  if(count<9){
+  if(count<8){
+      $('.swipe-wrap').append(city_moban);
+      if (window.innerWidth<767){
+      //  $("#search_form").css({'margin-left':'20%'});
+        $(".homepage").css({'height':window.innerHeight-80});
+        $(".today").css({'position':'absolute','bottom':'0'});
+
+      }
+      $("#backimg").css({'width':window.innerWidth});
+      $("#backimg").css({'height':window.innerHeight});
+      var c=document.getElementsByClassName("line-weather")[count+1];
+      ctx=c.getContext("2d");
+      c.width=$(".sevenday").width();
+      c.height=300;
       get_jsonp();
       $(".box").append("<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert' onclick = 'del()'>&times;</a>"+"<h4>"+high[0]+"°C</h4><h4>"+low[0]+"°C</h4><h4>"+today.weather+"</h4><p>"+$("#city1").val()+"</p></div>");
       count++;
@@ -355,16 +417,25 @@ document.getElementById("search").onclick=function(){
       $(".close").css({'top':'-5px'});
       $(".close").css({'right':'-5px'});
       // $(".close").hide();
-      $(".mycity").css({'width':w/3-10});
+      $(".mycity").css({'width':window.innerWidth/3-10});
       $(".mycity").css({'height':window.innerHeight/4});
-      $("#homecity").clone().attr('id','city'+count).appendTo($('.swipe-wrap'));
-      if(count==9){
+      window.mySwipe = new Swipe(document.getElementById('slider'), {
+        startSlide: 0,
+        speed: 400,
+        auto: 0,
+        draggable: false,
+        continuous: false,
+        disableScroll: false,
+        stopPropagation: false,
+        callback: function(index, elem) {},
+        transitionEnd: function(index, elem) {}
+      });
+      if(count==8){
         $(".add-city").hide();
       }
   }else{
     alert("最多添加 9 个城市");
   }
-  $(".inputcity").hide();
 }
 
 function del() {
