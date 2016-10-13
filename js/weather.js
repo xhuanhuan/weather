@@ -165,7 +165,7 @@ $(".today span").addClass('t');
 //-----表头-----
       var head="<tr>";
       for(var i in future){
-        head+="<th><ul><li>"+future[i].week+"</li><li>"+format(future[i].date)+"</li></ul></th>";
+        head+="<th><ul><li>"+future[i].week.replace('星期','周').replace('周天','周日')+"</li><li>"+format(future[i].date)+"</li></ul></th>";
       }
       head+="</tr>";
       $(".sev-wea thead").html(head);
@@ -218,7 +218,7 @@ function drawline(){
   for(var i in future){
   ctx.fillStyle = 'white';
   ctx.font="15px DFKai-SB"
-  ctx.fillText(future[i].week,(j+0.5)*w-22,20);
+  ctx.fillText(future[i].week.replace('星期','周').replace('周天','周日'),(j+0.5)*w-15,20);
   ctx.fillText(format(future[i].date),(j+0.5)*w-16.5,50);
   j++;
   if(j>=7){
@@ -309,7 +309,7 @@ function changetoTaday(){
   var c=0;
   for(var i in future){
     if(c==0){
-      future[i].week="今  天";
+      future[i].week="今天";
     }
     c++;
   }
