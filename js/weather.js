@@ -1,7 +1,7 @@
 function responseToscreen(){
   if (window.innerWidth<767){
-    $(".homepage").css({'height':window.innerHeight-80});
-    $(".today").css({'position':'absolute','bottom':'0'});
+    $(".homepage:eq("+count+")").css({'height':window.innerHeight-80});
+    $(".today:eq("+count+")").css({'position':'absolute','bottom':'0'});
   }
   $("#backimg").css({'width':window.innerWidth});
   $("#backimg").css({'height':window.innerHeight});
@@ -15,33 +15,11 @@ function addCity(){
       responseToscreen();
       c=document.getElementsByClassName("line-weather")[count];
       ctx=c.getContext("2d");
-      c.width=$(".sevenday").width();
+      c.width=$(".sevenday:eq("+count+")").width();
       c.height=300;
-      get_jsonp();
-      $(".box").append("<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert' onclick = 'del()'>&times;</a>"+"<h4>"+high[0]+"°C</h4><h4>"+low[0]+"°C</h4><h4>"+today.weather+"</h4><p>"+$("#city1").val()+"</p></div>");
-      count++;
-      $(".mycity").css({'width':window.innerWidth/3-10});
-      $(".mycity").css({'height':window.innerHeight/4});
-      $(".box p").addClass("title");
-      $(".mycity").addClass("alert");
-      console.log('hello');
-      $(".close").css({'position':'absolute'});
-      $(".close").css({'top':'-5px'});
-      $(".close").css({'right':'-5px'});
-      // $(".close").hide();
-      window.mySwipe = new Swipe(document.getElementById('slider'), {
-        startSlide: 0,
-        speed: 400,
-        auto: 0,
-        draggable: false,
-        continuous: false,
-        disableScroll: false,
-        stopPropagation: false,
-        callback: function(index, elem) {},
-        transitionEnd: function(index, elem) {}
-      });
+      get_jsonp();//利用回调函数将数据写入页面
       if(count==9){
-        $(".add-city").hide();
+        $(".add-city").hide();//删除掉增加城市的按钮
       }
   }else{
     alert("最多添加 9 个城市");
@@ -57,12 +35,6 @@ function init_cityside(){
     $(".add-city").show();
 }
 
-function del() {
-  count=count-1;
-  if(count<9){
-    $(".add-city").show();
-  }
-}
 //-------------画折线以及时间，日期等信息-------------
 function drawline(){
   ctx.clearRect(0,0,c.width,c.height);
@@ -163,124 +135,21 @@ if(j==5){
 function get_jsonp() {
     $("#result_fut").html('');
     $('#result_weather').html('正在查询中……');
-    // $.getJSON("http://v.juhe.cn/weather/index?callback=?", {
-    //     "cityname" : $("#city").val(),
-    //     "dtype" : "jsonp",
-    //     "key" : "488978971707864858562d990d5cf42f"
-    // }, function(data)
-   var data={
-	"resultcode":"200",
-	"reason":"successed!",
-	"result":{
-		"sk":{
-			"temp":"16",
-			"wind_direction":"西风",
-			"wind_strength":"2级",
-			"humidity":"34%",
-			"time":"15:52"
-		},
-		"today":{
-			"temperature":"11℃~20℃",
-			"weather":"晴",
-			"weather_id":{
-				"fa":"00",
-				"fb":"00"
-			},
-			"wind":"西南风微风",
-			"week":"星期日",
-			"city":"天津",
-			"date_y":"2016年10月09日",
-			"dressing_index":"较舒适",
-			"dressing_advice":"建议着薄外套、开衫牛仔衫裤等服装。年老体弱者应适当添加衣物，宜着夹克衫、薄毛衣等。",
-			"uv_index":"中等",
-			"comfort_index":"",
-			"wash_index":"较适宜",
-			"travel_index":"较适宜",
-			"exercise_index":"较适宜",
-			"drying_index":""
-		},
-		"future":{
-			"day_20161009":{
-				"temperature":"11℃~20℃",
-				"weather":"晴",
-				"weather_id":{
-					"fa":"00",
-					"fb":"00"
-				},
-				"wind":"西南风微风",
-				"week":"星期日",
-				"date":"20161009"
-			},
-			"day_20161010":{
-				"temperature":"10℃~22℃",
-				"weather":"多云",
-				"weather_id":{
-					"fa":"01",
-					"fb":"01"
-				},
-				"wind":"西南风3-4 级",
-				"week":"星期一",
-				"date":"20161010"
-			},
-			"day_20161011":{
-				"temperature":"9℃~19℃",
-				"weather":"晴",
-				"weather_id":{
-					"fa":"00",
-					"fb":"00"
-				},
-				"wind":"东北风3-4 级",
-				"week":"星期二",
-				"date":"20161011"
-			},
-			"day_20161012":{
-				"temperature":"12℃~21℃",
-				"weather":"晴",
-				"weather_id":{
-					"fa":"00",
-					"fb":"00"
-				},
-				"wind":"南风微风",
-				"week":"星期三",
-				"date":"20161012"
-			},
-			"day_20161013":{
-				"temperature":"13℃~24℃",
-				"weather":"晴",
-				"weather_id":{
-					"fa":"00",
-					"fb":"00"
-				},
-				"wind":"西南风微风",
-				"week":"星期四",
-				"date":"20161013"
-			},
-			"day_20161014":{
-				"temperature":"10℃~22℃",
-				"weather":"多云",
-				"weather_id":{
-					"fa":"01",
-					"fb":"01"
-				},
-				"wind":"西南风3-4 级",
-				"week":"星期五",
-				"date":"20161014"
-			},
-			"day_20161015":{
-				"temperature":"9℃~19℃",
-				"weather":"晴",
-				"weather_id":{
-					"fa":"00",
-					"fb":"00"
-				},
-				"wind":"东北风3-4 级",
-				"week":"星期六",
-				"date":"20161015"
-			}
-		}
-	},
-	"error_code":0
-  }
+    $.getJSON("http://v.juhe.cn/weather/index?callback=?", {
+        "cityname" : city[count],
+        "dtype" : "jsonp",
+        "key" : "488978971707864858562d990d5cf42f"
+    }, show);
+  //   $.getJSON("http://op.juhe.cn/onebox/weather/query?callback=?", {
+  //    "cityname" : city[count],
+  //    "dtype" : "jsonp",
+  //    "key" : "9b51aca938e929ef8ce099a88c02ce00"
+  //  }, function(data){console.log(data);console.log(count);console.log(city[count]);})//免费数据接口，但是数据内容不同
+ }
+ //核心函数，获取天气数据之后的回调函数
+function show(data){
+  console.log(data);
+  console.log(city[count]);
   sk = data.result.sk;
   today = data.result.today;
   future = data.result.future;
@@ -288,22 +157,22 @@ function get_jsonp() {
   changetoTaday();
   //----------homepage-------------
   var strtoday="<h1>"+sk.temp+"°<span>"+today.weather+"</span></h1><h4>体感温度"+sk.temp+"°</h4><h4>湿度"+sk.humidity+" "+sk.wind_direction+sk.wind_strength+"</h4>";
-  $(".today").html(strtoday);
-  $(".today span").addClass('t');
+  $(".today:eq("+count+")").html(strtoday);
+  $(".today:eq("+count+") span").addClass('t');
 //-----表头-----
   var head="<tr>";
   for(var i in future){
     head+="<th><ul><li>"+future[i].week+"</li><li>"+format(future[i].date)+"</li></ul></th>";
   }
   head+="</tr>";
-  $(".sev-wea thead").html(head);
+  $(".sev-wea:eq("+count+") thead").html(head);
 //------表身------
   var bodyintro="<tr>";
   for(var i in future){
     bodyintro+="<td><ul><li>"+future[i].weather+"</li><li>"+future[i].temperature.replace(/℃/g,'°').replace('~','~ ')+"</li></ul></td>";
   }
   bodyintro+="</tr>";
-  $(".sev-wea tbody").html(bodyintro);
+  $(".sev-wea:eq("+count+") tbody").html(bodyintro);
 //split temperature
   var lows=[];
   var highs=[];
@@ -326,11 +195,65 @@ function get_jsonp() {
   //-------折线----------
   drawline();
   //----指数------------
-  $(".ambrela").html(today.weather);
-  $(".clothe").html(today.dressing_advice[3]+today.dressing_advice[4]+today.dressing_advice[5]);
-  $(".car").html(today.wash_index);
-  $(".sun").html(today.uv_index);
-  $(".exercise").html(today.exercise_index);
-  $(".sunset").html("20:23");
+  $(".ambrela:eq("+count+")").html(today.weather);
+  $(".clothe:eq("+count+")").html(today.dressing_advice[3]+today.dressing_advice[4]+today.dressing_advice[5]);
+  $(".car:eq("+count+")").html(today.wash_index);
+  $(".sun:eq("+count+")").html(today.uv_index);
+  $(".exercise:eq("+count+")").html(today.exercise_index);
+  $(".sunset:eq("+count+")").html("20:23");
+
+
+  $(".box").append("<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+"<h4>"+high[0]+"°C</h4><h4>"+low[0]+"°C</h4><h4>"+today.weather+"</h4><p>"+$("#city1").val()+"</p></div>");
+  count++;
+  $(".mycity").css({'width':window.innerWidth/3-10});
+  $(".mycity").css({'height':window.innerHeight/4});
+  $(".box p").addClass("title");
+  $(".mycity").addClass("alert");
+  $(".close").css({'position':'absolute'});
+  $(".close").css({'top':'-5px'});
+  $(".close").css({'right':'-5px'});
+  var close = document.getElementsByClassName("close");
+  for(var i=0;i<close.length;i++){
+    close[i].index = i;
+    close[i].onclick=function(){
+      if(count<9){
+        $(".add-city").show();
+      }
+      count=count-1;
+      console.log('count:'+count);
+      console.log('this.index:'+this.index);
+      $('div[data-index='+this.index+']').remove();
+      //删除城市按键之后，需要重新建立滑动，因为swipe.js没有提供单独删除一页的函数
+      window.mySwipe = new Swipe(document.getElementById('slider'), {
+        startSlide: 0,
+        speed: 400,
+        auto: 0,
+        draggable: false,
+        continuous: false,
+        disableScroll: false,
+        stopPropagation: false,
+        callback: function(index, elem) {},
+        transitionEnd: function(index, elem) {}
+      })
+      close = document.getElementsByClassName("close");
+      for(var i=0;i<close.length;i++){
+        if(close[i].index>count-1)
+          close[i].index -= 1;
+        console.log('close[i].index:'+close[i].index);
+      }
+    }
+   }
+//调用swipe.js，设置滑动
+  window.mySwipe = new Swipe(document.getElementById('slider'), {
+    startSlide: 0,
+    speed: 400,
+    auto: 0,
+    draggable: false,
+    continuous: false,
+    disableScroll: false,
+    stopPropagation: false,
+    callback: function(index, elem) {},
+    transitionEnd: function(index, elem) {}
+    });
   return false;
 }

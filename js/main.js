@@ -28,7 +28,9 @@ var today;
 var future;
 var count = 0;
 var w=window.innerWidth+1;
-
+var city = [];
+city.push(returnCitySN["cname"].split('省')[1]);
+console.log(city);
 
 
 addCity();
@@ -56,12 +58,8 @@ $("#add").click(function(){
 $(".inputcity").show();
 });
 
-document.getElementsByClassName("close").onclick=function(){
-  count=count-1;
-  console.log(count);
-}
-
 document.getElementById("search").onclick=function(){
+  city.push(document.getElementById("city1").value);
   addCity();
 }
 
