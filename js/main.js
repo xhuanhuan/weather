@@ -1,3 +1,11 @@
+var low=[];
+var high=[];
+var sk;
+var today;
+var future;
+var count = 0;
+var w=window.innerWidth+1;
+var city = [];
 var city_moban =
     '<div>'+
     '<div class="container">'+
@@ -20,15 +28,8 @@ var city_moban =
   '<td><ul><li><img src="sun.jpg" style="width:20px;"></li><li class="sun"></li></ul></td>'+
   '<td><ul><li><img src="run.jpg" style="width:20px;"></li><li class="exercise"></li></ul></td>'+
   '<td><ul><li><img src="sunset.jpg" style="width:20px;"></li><li class="sunset"></li></ul></td>'+'</tr></table></div></div></div></div>'
+$(document).ready(function(){
 //---------------------------
-var low=[];
-var high=[];
-var sk;
-var today;
-var future;
-var count = 0;
-var w=window.innerWidth+1;
-var city = [];
 city.push(returnCitySN["cname"].split('省')[1]);
 console.log(city);
 
@@ -74,3 +75,4 @@ $("#getcity").click(function(){
         $('#city-store').animate({'left':0},500);
      }
 });
+})
