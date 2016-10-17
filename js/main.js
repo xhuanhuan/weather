@@ -30,7 +30,8 @@ var city_moban =
   '<td><ul><li><img src="sunset.jpg" style="width:20px;"></li><li class="sunset"></li></ul></td>'+'</tr></table></div></div></div></div>'
 $(document).ready(function(){
 //---------------------------
-city.push(returnCitySN["cname"].split('省')[1]);
+//city.push(returnCitySN["cname"].split('省')[1]);
+city.push('西安市');
 console.log(city);
 
 

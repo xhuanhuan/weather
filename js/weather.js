@@ -47,7 +47,7 @@ function drawline(){
   ctx.fillStyle = 'white';
   ctx.font= font_size + " DFKai-SB";
   ctx.fillText(future[i].week.replace('星期','周'),(j+0.5)*w-size,20);
-  ctx.fillText(format(future[i].date),(j+0.5)*w-size-size/2,50);
+  ctx.fillText(format(future[i].date),(j+0.5)*w-format(future[i].date).length/2*size/2,50);
   j++;
   if(j>=7){
     j=0;
@@ -100,7 +100,9 @@ function drawline(){
     var index=future[i].wind.indexOf("风");
     ctx.fillText(future[i].weather,(j+0.5)*w-future[i].weather.length*size/2,lowest);
     ctx.fillText(future[i].wind.slice(0,index+1),(j+0.5)*w-(index+1)*size/2,lowest+20);
-    ctx.fillText(future[i].wind.slice(index+1),(j+0.5)*w-(future[i].wind.length-index-1)*size/2,lowest+40);
+    var temp1 = future[i].wind.slice(index+1);
+    
+    ctx.fillText(temp1,(j+0.5)*w-(future[i].wind.length-index-1)*size/2,lowest+40);
     j++;
     if(j>=7){
       j=0;
