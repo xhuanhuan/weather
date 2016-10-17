@@ -30,6 +30,8 @@ var city_moban =
   '<td><ul><li><img src="sunset.jpg" style="width:20px;"></li><li class="sunset"></li></ul></td>'+'</tr></table></div></div></div></div>'
 $(document).ready(function(){
 //---------------------------
+$.getScript("http://pv.sohu.com/cityjson?ie=utf-8",main);
+function main(){
 city.push(returnCitySN["cname"].split('省')[1]);
 console.log(city);
 
@@ -75,4 +77,5 @@ $("#getcity").click(function(){
         $('#city-store').animate({'left':0},500);
      }
 });
+}
 })
