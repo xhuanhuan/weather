@@ -44,7 +44,7 @@ function drawline(){
   for(var i in future){
   ctx.fillStyle = 'white';
   ctx.font="15px DFKai-SB"
-  ctx.fillText(future[i].week,(j+0.5)*w-22,20);
+  ctx.fillText(future[i].week.replace('星期','周'),(j+0.5)*w-22,20);
   ctx.fillText(format(future[i].date),(j+0.5)*w-16.5,50);
   j++;
   if(j>=7){
@@ -112,7 +112,7 @@ function changetoTaday(){
   var c=0;
   for(var i in future){
     if(c==0){
-      future[i].week="今  天";
+      future[i].week="今天";
     }
     c++;
   }
@@ -156,13 +156,13 @@ function show(data){
   //-----今天---------
   changetoTaday();
   //----------homepage-------------
-  var strtoday="<h1>"+sk.temp+"°<span>"+today.weather+"</span></h1><h4>体感温度"+sk.temp+"°</h4><h4>湿度"+sk.humidity+" "+sk.wind_direction+sk.wind_strength+"</h4>";
+  var strtoday="<h1 style = 'float:left'>"+sk.temp+"°</h1>"+"<br><br><span> <i style = 'font-size: 30px;'class = 'fi-marker'></i>"+city[count]+"</span><br />"+"<span>"+today.weather+"</span><div style= 'clear:left'></div><h4>体感温度"+sk.temp+"°</h4><h4>湿度"+sk.humidity+" "+sk.wind_direction+sk.wind_strength+"</h4>";
   $(".today:eq("+count+")").html(strtoday);
   $(".today:eq("+count+") span").addClass('t');
 //-----表头-----
   var head="<tr>";
   for(var i in future){
-    head+="<th><ul><li>"+future[i].week+"</li><li>"+format(future[i].date)+"</li></ul></th>";
+    head+="<th><ul><li>"+future[i].week.replace('星期','周')+"</li><li>"+format(future[i].date)+"</li></ul></th>";
   }
   head+="</tr>";
   $(".sev-wea:eq("+count+") thead").html(head);
@@ -203,7 +203,7 @@ function show(data){
   $(".sunset:eq("+count+")").html("20:23");
 
 
-  $(".box").append("<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+"<h4>"+high[0]+"°C</h4><h4>"+low[0]+"°C</h4><h4>"+today.weather+"</h4><p>"+$("#city1").val()+"</p></div>");
+  $(".box").append("<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+"<h4>"+high[0]+"°C</h4><h4>"+low[0]+"°C</h4><h4>"+today.weather+"</h4><p>"+city[count]+"</p></div>");
   count++;
   $(".mycity").css({'width':window.innerWidth/3-10});
   $(".mycity").css({'height':window.innerHeight/4});
