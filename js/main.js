@@ -10,7 +10,7 @@ var city_moban =
     '<div>'+
     '<div class="container">'+
       '<div class="row">' +
-'<div class="homepage" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">'+
+'<div class="homepage col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">'+
 '<div class="today">'+'</div></div>'+
 '<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">'+
 '<div class="table-responsive">'+
@@ -32,6 +32,7 @@ $(document).ready(function(){
 //---------------------------
 $.getScript("http://pv.sohu.com/cityjson?ie=utf-8",main);
 function main(){
+  console.log(returnCitySN);
 city.push(returnCitySN["cname"].split('省')[1]);
 console.log(city);
 
