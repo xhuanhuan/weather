@@ -1,6 +1,6 @@
 function responseToscreen(){
   if (window.innerWidth<767){
-    $(".homepage:eq("+count+")").css({'height':window.innerHeight-80});
+    $(".homepage:eq("+count+")").css({'height':screen.availHeight});
     $(".today:eq("+count+")").css({'position':'absolute','bottom':'0'});
   }
   $("#backimg").css({'width':window.innerWidth});
@@ -41,11 +41,13 @@ function drawline(){
   //写 星期、日期
   var w=$(".line-weather").width()/7;
   var j=0;
+  var font_size = '13px';
+  var size = parseInt(font_size);
   for(var i in future){
   ctx.fillStyle = 'white';
-  ctx.font="15px DFKai-SB"
-  ctx.fillText(future[i].week.replace('星期','周'),(j+0.5)*w-22,20);
-  ctx.fillText(format(future[i].date),(j+0.5)*w-16.5,50);
+  ctx.font= font_size + " DFKai-SB";
+  ctx.fillText(future[i].week.replace('星期','周'),(j+0.5)*w-size,20);
+  ctx.fillText(format(future[i].date),(j+0.5)*w-size-size/2,50);
   j++;
   if(j>=7){
     j=0;
@@ -68,7 +70,7 @@ function drawline(){
   	ctx.closePath();
   	ctx.fillStyle = 'white';
     ctx.fill();
-    ctx.font="15px DFKai-SB";
+    ctx.font= font_size + " DFKai-SB";
     ctx.fillText(low[i]+'°',(i+0.5)*w-10,(max - temp1)/(max - min)*150+70+20);
   }
 //画线
@@ -86,7 +88,7 @@ function drawline(){
   	ctx.closePath();
   	ctx.fillStyle = 'white';
     ctx.fill();
-    ctx.font="15px DFKai-SB";
+    ctx.font= font_size + " DFKai-SB";
     ctx.fillText(high[i]+'°',(i+0.5)*w-10,(max - temp1)/(max - min)*150+70-10);
   }
 //写 风、等级
@@ -94,12 +96,11 @@ function drawline(){
   var lowest=150+100;
     for(var i in future){
     ctx.fillStyle = 'white';
-    ctx.font="15px DFKai-SB"
+    ctx.font= font_size + " DFKai-SB";
     var index=future[i].wind.indexOf("风");
-
-    ctx.fillText(future[i].weather,(j+0.5)*w-5,lowest);
-    ctx.fillText(future[i].wind.slice(0,index+1),(j+0.5)*w-20,lowest+20);
-    ctx.fillText(future[i].wind.slice(index+1),(j+0.5)*w-18,lowest+40);
+    ctx.fillText(future[i].weather,(j+0.5)*w-future[i].weather.length*size/2,lowest);
+    ctx.fillText(future[i].wind.slice(0,index+1),(j+0.5)*w-(index+1)*size/2,lowest+20);
+    ctx.fillText(future[i].wind.slice(index+1),(j+0.5)*w-(future[i].wind.length-index-1)*size/2,lowest+40);
     j++;
     if(j>=7){
       j=0;
@@ -156,7 +157,7 @@ function show(data){
   //-----今天---------
   changetoTaday();
   //----------homepage-------------
-  var strtoday="<h1 style = 'float:left'>"+sk.temp+"°</h1>"+"<br><br><span> <i style = 'font-size: 30px;'class = 'fi-marker'></i>"+city[count]+"</span><br />"+"<span>"+today.weather+"</span><div style= 'clear:left'></div><h4>体感温度"+sk.temp+"°</h4><h4>湿度"+sk.humidity+" "+sk.wind_direction+sk.wind_strength+"</h4>";
+  var strtoday="<h1 style = 'float:left'>"+sk.temp+"°</h1>"+"<br><br><span> <span style = 'font-size: 30px;'class = 'icon'>o</span>"+city[count]+"</span><br />"+"<span>"+today.weather+"</span><div style= 'clear:left'></div><h4>体感温度"+sk.temp+"°</h4><h4>湿度"+sk.humidity+" "+sk.wind_direction+sk.wind_strength+"</h4>";
   $(".today:eq("+count+")").html(strtoday);
   $(".today:eq("+count+") span").addClass('t');
 //-----表头-----
@@ -169,7 +170,33 @@ function show(data){
 //------表身------
   var bodyintro="<tr>";
   for(var i in future){
-    bodyintro+="<td><ul><li>"+future[i].weather+"</li><li>"+future[i].temperature.replace(/℃/g,'°').replace('~','~ ')+"</li></ul></td>";
+    var temp = future[i].weather.split('转')[0];
+    if(temp == '晴')
+    {
+      temp = "<span class = 'icon'>*</span>";
+    }
+    else if(temp == '多云'){
+      temp = "<span class = 'icon'>)</span>";
+    }
+    else if(temp == '小雨'){
+      temp = "<span class = 'icon'>'</span>";
+    }
+    else if(temp == '雷阵雨'){
+      temp = "<span class = 'icon'>%</span>";
+    }
+    else if(temp == '大雨'){
+      temp = "<span class = 'icon'>(</span>";
+    }
+    else if(temp == '小雪' || temp == '中雪' || temp == '大雪'){
+      temp = "<span class = 'icon'>&</span>";
+    }
+    else if(temp == '阴'){
+      temp = "<span class = 'icon'>l</span>";
+    }
+    else {
+      temp = "<span class = 'icon'>8</span>";
+    }
+    bodyintro+="<td><ul><li>"+temp+"</li><li>"+future[i].weather.split('转')[0]+"</li><li>"+future[i].temperature.replace(/℃/g,'°').replace('~','~ ')+"</li></ul></td>";
   }
   bodyintro+="</tr>";
   $(".sev-wea:eq("+count+") tbody").html(bodyintro);
