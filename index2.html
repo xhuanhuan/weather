@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta  charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My weather test</title>
+  <link rel="stylesheet" href="css/style.css">
+	<!-- <link rel="Shortcut Icon" href="icon.jpg"> -->
+</head>
+<body>
+<div id="slider" class="swipe">
+  <div class="swipe-wrap">
+    <div style = 'overflow:auto'><div style = 'height:200px;width:2000px;background-color:red;'></div></div>
+    <div style = 'overflow:auto'><div style = 'height:200px;width:2000px;background-color:yellow;'></div></div>
+    <div style = 'overflow:auto'><div style = 'height:200px;width:2000px;background-color:grey;'></div></div>
+  </div>
+</div>
+<div style = 'font:15px  DFKai-SB'>
+<p><span>1</span></p>
+<p><span>马</span></p>
+<p><span>-</span></p>
+<p><span>m</span></p>
+</div>
+
+
+<script src='js/swipe.js'></script>
+<script>
+  window.mySwipe = new Swipe(document.getElementById('slider'), {
+    startSlide: 0,
+    speed: 400,
+    auto: 1000,
+    draggable: false,
+    continuous: true,
+    disableScroll: false,
+    stopPropagation: false,
+    callback: function(index, elem) {},
+    transitionEnd: function(index, elem) {}
+  });
+</script>
+</body>
+</html>

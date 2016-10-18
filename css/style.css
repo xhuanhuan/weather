@@ -71,7 +71,6 @@ ul{
 }
 .line-weather{
   background: rgba(0,0,0,0.1);
-  z-index: 9999;
 }
 .sevenday{
   width:100;
@@ -186,10 +185,19 @@ border-top:1px solid #d0d0d0;
     display:block;
   }
   #city-store{
-    z-index:9999;
+    z-index:2;
     position:fixed;
     top: 0;
     background-color: white;
     display:block;
   }
+}
+#backimg{
+  z-index:-1;
+}
+.navbar-fixed-top{
+  z-index:1;
+}
+th ul{
+  margin-bottom: 0;
 }

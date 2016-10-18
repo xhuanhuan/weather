@@ -1,8 +1,16 @@
+var low=[];
+var high=[];
+var sk;
+var today;
+var future;
+var count = 0;
+var w=window.innerWidth+1;
+var city = [];
 var city_moban =
     '<div>'+
     '<div class="container">'+
       '<div class="row">' +
-'<div class="homepage" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">'+
+'<div class="homepage col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">'+
 '<div class="today">'+'</div></div>'+
 '<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">'+
 '<div class="table-responsive">'+
@@ -20,15 +28,13 @@ var city_moban =
   '<td><ul><li><img src="sun.jpg" style="width:20px;"></li><li class="sun"></li></ul></td>'+
   '<td><ul><li><img src="run.jpg" style="width:20px;"></li><li class="exercise"></li></ul></td>'+
   '<td><ul><li><img src="sunset.jpg" style="width:20px;"></li><li class="sunset"></li></ul></td>'+'</tr></table></div></div></div></div>'
+$(document).ready(function(){
 //---------------------------
-var low=[];
-var high=[];
-var sk;
-var today;
-var future;
-var count = 0;
-var w=window.innerWidth+1;
-
+$.getScript("http://pv.sohu.com/cityjson?ie=utf-8",main);
+function main(){
+  console.log(returnCitySN);
+city.push(returnCitySN["cname"].split('省')[1]);
+console.log(city);
 
 
 addCity();
@@ -56,12 +62,8 @@ $("#add").click(function(){
 $(".inputcity").show();
 });
 
-document.getElementsByClassName("close").onclick=function(){
-  count=count-1;
-  console.log(count);
-}
-
 document.getElementById("search").onclick=function(){
+  city.push(document.getElementById("city1").value);
   addCity();
 }
 
@@ -76,3 +78,5 @@ $("#getcity").click(function(){
         $('#city-store').animate({'left':0},500);
      }
 });
+}
+})
