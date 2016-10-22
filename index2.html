@@ -12,7 +12,7 @@
 <div id="slider" class="swipe">
   <div class="swipe-wrap">
     <div style = 'overflow:auto'><div style = 'height:200px;width:2000px;background-color:red;'></div></div>
-    <div style = 'overflow:auto'><div style = 'height:200px;width:2000px;background-color:yellow;'></div></div>
+    <div id = '2' style = 'overflow:auto'><div style = 'height:200px;width:2000px;background-color:yellow;'></div></div>
     <div style = 'overflow:auto'><div style = 'height:200px;width:2000px;background-color:grey;'></div></div>
   </div>
 </div>
@@ -29,7 +29,7 @@
   window.mySwipe = new Swipe(document.getElementById('slider'), {
     startSlide: 0,
     speed: 400,
-    auto: 1000,
+    auto: 3000,
     draggable: false,
     continuous: true,
     disableScroll: false,
@@ -37,6 +37,11 @@
     callback: function(index, elem) {},
     transitionEnd: function(index, elem) {}
   });
+  var sc = document.getElementById('2');
+  sc.addEventListener('touchstart',function(evevt){
+  	//alert(event.type);
+  	event.stopPropagation();
+  })
 </script>
 </body>
 </html>
