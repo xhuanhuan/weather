@@ -17,8 +17,8 @@ function addCity(){
       responseToscreen();
       c=document.getElementsByClassName("line-weather")[count];
       ctx=c.getContext("2d");
-      //c.width=$(".sevenday:eq("+count+")").width();
-      c.width = 700;
+      c.width=$(".sevenday:eq("+count+")").width();
+      //c.width = 700;
       c.height=300;
       get_jsonp();//利用回调函数将数据写入页面
       var lineweather = document.getElementsByClassName('line-weather')[count];
@@ -44,8 +44,8 @@ function init_cityside(){
 function drawline(){
   ctx.clearRect(0,0,c.width,c.height);
   //写 星期、日期
-  //var w=$(".line-weather").width()/7;
-  var w = 100;
+  var w=$(".line-weather").width()/7;
+  //var w = 100;
   var j=0;
   var font_size = '13px';
   var size = parseInt(font_size);
