@@ -149,11 +149,9 @@ function get_jsonp() {
         "dtype" : "jsonp",
         "key" : "488978971707864858562d990d5cf42f"
     }, show);
-  //   $.getJSON("http://op.juhe.cn/onebox/weather/query?callback=?", {
-  //    "cityname" : city[count],
-  //    "dtype" : "jsonp",
-  //    "key" : "9b51aca938e929ef8ce099a88c02ce00"
-  //  }, function(data){console.log(data);console.log(count);console.log(city[count]);})//免费数据接口，但是数据内容不同
+    // var jsonp = document.createElement('script');
+    // jsonp.src = "http://v.juhe.cn/weather/index?callback=show&cityname="+city[count]+"&dtype=jsonp&key=488978971707864858562d990d5cf42f"
+    // document.body.appendChild(jsonp)
  }
  //核心函数，获取天气数据之后的回调函数
 function show(data){
