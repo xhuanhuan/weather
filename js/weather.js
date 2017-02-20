@@ -18,9 +18,7 @@ function addCity(){
       c.width=$(".sevenday:eq("+count+")").width();
       c.height=300;
       get_jsonp();//利用回调函数将数据写入页面
-      if(count==9){
-        $(".add-city").hide();//删除掉增加城市的按钮
-      }
+
   }else{
     alert("最多添加 9 个城市");
   }
@@ -30,8 +28,7 @@ function init_cityside(){
     $("#city-store").css({'width':w});
     $("#city-store").css({'height':window.innerHeight-10});
     $("#city-store").css({'left':-w});
-    $(".add-city").css({'width':w/3-10});
-    $(".add-city").css({'height':window.innerHeight/4});
+
     $(".add-city").show();
 }
 
@@ -101,7 +98,7 @@ function drawline(){
     ctx.fillText(future[i].weather,(j+0.5)*w-future[i].weather.length*size/2,lowest);
     ctx.fillText(future[i].wind.slice(0,index+1),(j+0.5)*w-(index+1)*size/2,lowest+20);
     var temp1 = future[i].wind.slice(index+1);
-    
+
     ctx.fillText(temp1,(j+0.5)*w-(future[i].wind.length-index-1)*size/2,lowest+40);
     j++;
     if(j>=7){
@@ -136,13 +133,16 @@ if(j==5){
 
 //-----------获取数据并写入DOM------
 function get_jsonp() {
+  var Weather = JSON.parse('{"resultcode":"200","reason":"successed!","result":{"sk":{"temp":"6","wind_direction":"东北风","wind_strength":"5级","humidity":"27%","time":"22:29"},"today":{"temperature":"0℃~11℃","weather":"阴转小雨","weather_id":{"fa":"02","fb":"07"},"wind":"东北风3-4 级","week":"星期一","city":"西安","date_y":"2017年02月20日","dressing_index":"冷","dressing_advice":"天气冷，建议着棉服、羽绒服、皮夹克加羊毛衫等冬季服装。年老体弱者宜着厚棉衣、冬大衣或厚羽绒服。","uv_index":"最弱","comfort_index":"","wash_index":"不宜","travel_index":"较不宜","exercise_index":"较不宜","drying_index":""},"future":{"day_20170220":{"temperature":"0℃~11℃","weather":"阴转小雨","weather_id":{"fa":"02","fb":"07"},"wind":"东北风3-4 级","week":"星期一","date":"20170220"},"day_20170221":{"temperature":"-3℃~4℃","weather":"雨夹雪转阴","weather_id":{"fa":"06","fb":"02"},"wind":"东北风微风","week":"星期二","date":"20170221"},"day_20170222":{"temperature":"-3℃~6℃","weather":"阴","weather_id":{"fa":"02","fb":"02"},"wind":"东北风微风","week":"星期三","date":"20170222"},"day_20170223":{"temperature":"0℃~6℃","weather":"多云","weather_id":{"fa":"01","fb":"01"},"wind":"东北风微风","week":"星期四","date":"20170223"},"day_20170224":{"temperature":"0℃~7℃","weather":"多云","weather_id":{"fa":"01","fb":"01"},"wind":"东北风微风","week":"星期五","date":"20170224"},"day_20170225":{"temperature":"-3℃~6℃","weather":"阴","weather_id":{"fa":"02","fb":"02"},"wind":"东北风微风","week":"星期六","date":"20170225"},"day_20170226":{"temperature":"-3℃~6℃","weather":"阴","weather_id":{"fa":"02","fb":"02"},"wind":"东北风微风","week":"星期日","date":"20170226"}}},"error_code":0}');
     $("#result_fut").html('');
     $('#result_weather').html('正在查询中……');
-    $.getJSON("http://v.juhe.cn/weather/index?callback=?", {
-        "cityname" : city[count],
-        "dtype" : "jsonp",
-        "key" : "488978971707864858562d990d5cf42f"
-    }, show);
+    console.log(Weather);
+    show(Weather);
+    // $.getJSON("http://v.juhe.cn/weather/index?callback=?", {
+    //     "cityname" : city[count],
+    //     "dtype" : "jsonp",
+    //     "key" : "488978971707864858562d990d5cf42f"
+    // }, show);
   //   $.getJSON("http://op.juhe.cn/onebox/weather/query?callback=?", {
   //    "cityname" : city[count],
   //    "dtype" : "jsonp",
@@ -231,29 +231,49 @@ function show(data){
   $(".exercise:eq("+count+")").html(today.exercise_index);
   $(".sunset:eq("+count+")").html("20:23");
 
-
-  $(".box").append("<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+"<h4>"+high[0]+"°C</h4><h4>"+low[0]+"°C</h4><h4>"+today.weather+"</h4><p>"+city[count]+"</p></div>");
+var weatherArr=[];
+  $(".box")[count].innerHTML="<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+"<h4>"+high[0]+"°C</h4><h4>"+low[0]+"°C</h4><h4>"+today.weather+"</h4><p>"+city[count]+"</p></div>";
+  $(".box")[count].style.order=0;
+  if(count<=7){
+    $(".box")[count+1].innerHTML='';
+    $(".box")[count+1].append(addbutton);
+    addbutton.parentNode.style.order=1;
+  }
   count++;
-  $(".mycity").css({'width':window.innerWidth/3-10});
-  $(".mycity").css({'height':window.innerHeight/4});
+
   $(".box p").addClass("title");
   $(".mycity").addClass("alert");
-  $(".close").css({'position':'absolute'});
-  $(".close").css({'top':'-5px'});
+  $(".close").css({'position':'relative'});
+  $(".close").css({'top':'-15px'});
   $(".close").css({'right':'-5px'});
   var close = document.getElementsByClassName("close");
   for(var i=0;i<close.length;i++){
     close[i].index = i;
     close[i].onclick=function(){
-      if(count<9){
-        $(".add-city").show();
+
+      var arr=$('.box');
+      for(var ii=0;ii<arr.length;ii++){
+        if(arr[ii].innerHTML==''){
+          arr[ii].style.order=2;
+        }else if(arr[ii].childNodes[0].nodeName=="BUTTON"){
+          arr[ii].style.order=1;
+        }else{
+          arr[ii].style.order=0;
+        }
       }
+
+      if(count>=9){
+        $('.box')[this.index].append(addbutton);
+      }
+      console.log(this);
+      console.log(  this.parentNode);
+      this.parentNode.parentNode.style.order=2;
       count=count-1;
-      console.log('count:'+count);
-      console.log('this.index:'+this.index);
+      // console.log('count:'+count);
+      // console.log('this.index:'+this.index);
       $('div[data-index='+this.index+']').remove();
       //删除城市按键之后，需要重新建立滑动，因为swipe.js没有提供单独删除一页的函数
-      window.mySwipe = new Swipe(document.getElementById('slider'), {
+       window.mySwipe = new Swipe(document.getElementById('slider'), {
         startSlide: 0,
         speed: 400,
         auto: 0,
@@ -268,9 +288,12 @@ function show(data){
       for(var i=0;i<close.length;i++){
         if(close[i].index>count-1)
           close[i].index -= 1;
-        console.log('close[i].index:'+close[i].index);
+        // console.log('close[i].index:'+close[i].index);
       }
+
+
     }
+
    }
 //调用swipe.js，设置滑动
   window.mySwipe = new Swipe(document.getElementById('slider'), {

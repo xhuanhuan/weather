@@ -125,37 +125,46 @@ font-size: 25px;
 }
 #city-store{
   display:none;
+  justify-content: space-between;
+  align-content: space-between;
+  flex-wrap: wrap;
 }
 #getback{
   font-size:18px;
   border-color: transparent;
 }
 .box{
-  width:100%;
+  background-color:blue;
+  width: 30%;
+  height:30%;
+  margin: 5px;
+  align-self: flex-start;
+  order:2;
   display:flex;
-  flex-flow:wrap;
-  justify-content:flex-start;
+}
+.city-box{
+  width:100%;
+  height:600px;
+
+  display:flex;
+  justify-content: space-around;
+  align-content: space-around;
+  flex-wrap: wrap;
 }
 .add-city{
-  width:50px;
-  height:70px;
   border: 3px dotted #d0d0d0;
-  text-align:center;
-  padding-top:60px;
-  margin:5px;
+  flex-grow:1;
 }
 .mycity{
-  width:50px;
-  height:70px;
-  /*border: 3px dotted #d0d0d0;*/
   background-color: #f0f0f0;
   text-align:center;
-  margin:5px;
-  position:relative;
+  flex-grow:1;
 }
 .alert{
   padding:0;
+  margin: 0;
   padding-top: 15px;
+  flex-grow:1;
 }
 .inputcity{
   float:right;

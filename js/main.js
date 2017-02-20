@@ -6,6 +6,8 @@ var future;
 var count = 0;
 var w=window.innerWidth+1;
 var city = [];
+var addbutton=$(".add-city")[0];
+addbutton
 var city_moban =
     '<div>'+
     '<div class="container">'+
@@ -65,6 +67,7 @@ $(".inputcity").show();
 document.getElementById("search").onclick=function(){
   city.push(document.getElementById("city1").value);
   addCity();
+  $('.inputcity').hide();
 }
 
 $("#getback").click(function(){
