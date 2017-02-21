@@ -6,8 +6,19 @@ var future;
 var count = 0;
 var w=window.innerWidth+1;
 var city = [];
+
 var addbutton=$(".add-city")[0];
-addbutton
+var arr=$('.box');
+for(var ii=0;ii<arr.length;ii++){
+  if(arr[ii].innerHTML==''){
+    arr[ii].style.order=2;
+  }else if(arr[ii].childNodes[0].nodeName=="BUTTON"){
+    arr[ii].style.order=1;
+  }else{
+    arr[ii].style.order=0;
+  }
+}
+
 var city_moban =
     '<div>'+
     '<div class="container">'+

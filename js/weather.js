@@ -232,14 +232,21 @@ function show(data){
   $(".sunset:eq("+count+")").html("20:23");
 
 var weatherArr=[];
-  $(".box")[count].innerHTML="<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+"<h4>"+high[0]+"°C</h4><h4>"+low[0]+"°C</h4><h4>"+today.weather+"</h4><p>"+city[count]+"</p></div>";
-  $(".box")[count].style.order=0;
-  if(count<=7){
-    $(".box")[count+1].innerHTML='';
-    $(".box")[count+1].append(addbutton);
+  addbutton.parentNode.style.order=0;
+  addbutton.parentNode.innerHTML="<div class='mycity'>"+"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+"<h4>"+high[0]+"°C</h4><h4>"+low[0]+"°C</h4><h4>"+today.weather+"</h4><p>"+city[count]+"</p></div>";
+  count++;
+  if(count<=8){
+    var arr=$('.box');
+    for(var ii=0;ii<arr.length;ii++){
+    if(arr[ii].style.order==2){
+        arr[ii].innerHTML='';
+        arr[ii].append(addbutton);
+        break;
+      }
+    }
     addbutton.parentNode.style.order=1;
   }
-  count++;
+console.log("add count:"+count)
 
   $(".box p").addClass("title");
   $(".mycity").addClass("alert");
@@ -249,27 +256,26 @@ var weatherArr=[];
   var close = document.getElementsByClassName("close");
   for(var i=0;i<close.length;i++){
     close[i].index = i;
+//删除城市
     close[i].onclick=function(){
 
-      var arr=$('.box');
-      for(var ii=0;ii<arr.length;ii++){
-        if(arr[ii].innerHTML==''){
-          arr[ii].style.order=2;
-        }else if(arr[ii].childNodes[0].nodeName=="BUTTON"){
-          arr[ii].style.order=1;
-        }else{
-          arr[ii].style.order=0;
+        if(this.parentNode.childNodes[4]){
+        var ct=this.parentNode.childNodes[4].innerHTML;
+        if(city.indexOf(ct)!=-1){
+          city.splice(city.indexOf(ct),1);
+        }else if(city.indexOf(ct.slice(0,ct.length-1))!=-1){
+          city.splice(city.indexOf(ct.slice(0,ct.length-1)),1);
         }
       }
+      console.log(city);
 
-      if(count>=9){
+     if(count>=9){
         $('.box')[this.index].append(addbutton);
       }
-      console.log(this);
-      console.log(  this.parentNode);
+
       this.parentNode.parentNode.style.order=2;
       count=count-1;
-      // console.log('count:'+count);
+      console.log('count:'+count);
       // console.log('this.index:'+this.index);
       $('div[data-index='+this.index+']').remove();
       //删除城市按键之后，需要重新建立滑动，因为swipe.js没有提供单独删除一页的函数
@@ -288,9 +294,7 @@ var weatherArr=[];
       for(var i=0;i<close.length;i++){
         if(close[i].index>count-1)
           close[i].index -= 1;
-        // console.log('close[i].index:'+close[i].index);
       }
-
 
     }
 
