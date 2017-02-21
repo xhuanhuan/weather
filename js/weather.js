@@ -246,7 +246,7 @@ var weatherArr=[];
     }
     addbutton.parentNode.style.order=1;
   }
-console.log("add count:"+count)
+
 
   $(".box p").addClass("title");
   $(".mycity").addClass("alert");
@@ -267,7 +267,6 @@ console.log("add count:"+count)
           city.splice(city.indexOf(ct.slice(0,ct.length-1)),1);
         }
       }
-      console.log(city);
 
      if(count>=9){
         $('.box')[this.index].append(addbutton);
@@ -275,9 +274,33 @@ console.log("add count:"+count)
 
       this.parentNode.parentNode.style.order=2;
       count=count-1;
-      console.log('count:'+count);
       // console.log('this.index:'+this.index);
-      $('div[data-index='+this.index+']').remove();
+      var cityarr=$(".mycity");
+      for( var p = 0 ; p <cityarr.length ; p++ ){
+        var numofdelcitys=$('div[data-index='+p+']'+' .today .t')[0].innerHTML;
+        var delpart=numofdelcitys.match("<.+>")[0];
+        var numofdelcity=numofdelcitys.replace(delpart,'').replace(' ','');
+        console.log("numofdelcity:"+numofdelcity);
+        console.log("ct:"+ct);
+        if(numofdelcity==ct){
+        $('div[data-index='+p+']').remove();
+          break;
+        }
+      }
+
+      if(count==8){
+        var arr=$('.box');
+        for(var ii=0;ii<arr.length;ii++){
+        if(arr[ii].style.order==2){
+            arr[ii].innerHTML='';
+            arr[ii].append(addbutton);
+            break;
+          }
+        }
+        addbutton.parentNode.style.order=1;
+      }
+
+      //  $('div[data-index='+this.index+']').remove();
       //删除城市按键之后，需要重新建立滑动，因为swipe.js没有提供单独删除一页的函数
        window.mySwipe = new Swipe(document.getElementById('slider'), {
         startSlide: 0,
