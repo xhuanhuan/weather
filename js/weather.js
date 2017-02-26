@@ -7,7 +7,9 @@ function responseToscreen(){
   $("#backimg").css({'height':window.innerHeight});
 }
 
-
+function stop(event){
+  event.stopPropagation();
+}
 //增加城市
 function addCity(){
   if(count<9){
@@ -16,8 +18,11 @@ function addCity(){
       c=document.getElementsByClassName("line-weather")[count];
       ctx=c.getContext("2d");
       c.width=$(".sevenday:eq("+count+")").width();
+      //c.width = 700;
       c.height=300;
       get_jsonp();//利用回调函数将数据写入页面
+      var lineweather = document.getElementsByClassName('line-weather')[count];
+      lineweather.addEventListener('touchstart',stop,false);
       if(count==9){
         $(".add-city").hide();//删除掉增加城市的按钮
       }
@@ -40,6 +45,7 @@ function drawline(){
   ctx.clearRect(0,0,c.width,c.height);
   //写 星期、日期
   var w=$(".line-weather").width()/7;
+  //var w = 100;
   var j=0;
   var font_size = '13px';
   var size = parseInt(font_size);
@@ -101,7 +107,7 @@ function drawline(){
     ctx.fillText(future[i].weather,(j+0.5)*w-future[i].weather.length*size/2,lowest);
     ctx.fillText(future[i].wind.slice(0,index+1),(j+0.5)*w-(index+1)*size/2,lowest+20);
     var temp1 = future[i].wind.slice(index+1);
-    
+
     ctx.fillText(temp1,(j+0.5)*w-(future[i].wind.length-index-1)*size/2,lowest+40);
     j++;
     if(j>=7){
@@ -143,11 +149,9 @@ function get_jsonp() {
         "dtype" : "jsonp",
         "key" : "488978971707864858562d990d5cf42f"
     }, show);
-  //   $.getJSON("http://op.juhe.cn/onebox/weather/query?callback=?", {
-  //    "cityname" : city[count],
-  //    "dtype" : "jsonp",
-  //    "key" : "9b51aca938e929ef8ce099a88c02ce00"
-  //  }, function(data){console.log(data);console.log(count);console.log(city[count]);})//免费数据接口，但是数据内容不同
+    // var jsonp = document.createElement('script');
+    // jsonp.src = "http://v.juhe.cn/weather/index?callback=show&cityname="+city[count]+"&dtype=jsonp&key=488978971707864858562d990d5cf42f"
+    // document.body.appendChild(jsonp)
  }
  //核心函数，获取天气数据之后的回调函数
 function show(data){
@@ -251,6 +255,8 @@ function show(data){
       count=count-1;
       console.log('count:'+count);
       console.log('this.index:'+this.index);
+      var lineweather = document.getElementsByClassName('line-weather')[this.index];
+      lineweather.removeEventListener('touchstart',stop,false);
       $('div[data-index='+this.index+']').remove();
       //删除城市按键之后，需要重新建立滑动，因为swipe.js没有提供单独删除一页的函数
       window.mySwipe = new Swipe(document.getElementById('slider'), {
