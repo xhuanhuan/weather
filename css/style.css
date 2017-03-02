@@ -134,7 +134,7 @@ font-size: 25px;
   border-color: transparent;
 }
 .box{
-  background-color:blue;
+  /*background-color:blue;*/
   width: 30%;
   height:30%;
   margin: 5px;

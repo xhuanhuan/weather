@@ -133,16 +133,16 @@ if(j==5){
 
 //-----------获取数据并写入DOM------
 function get_jsonp() {
-  var Weather = JSON.parse('{"resultcode":"200","reason":"successed!","result":{"sk":{"temp":"6","wind_direction":"东北风","wind_strength":"5级","humidity":"27%","time":"22:29"},"today":{"temperature":"0℃~11℃","weather":"阴转小雨","weather_id":{"fa":"02","fb":"07"},"wind":"东北风3-4 级","week":"星期一","city":"西安","date_y":"2017年02月20日","dressing_index":"冷","dressing_advice":"天气冷，建议着棉服、羽绒服、皮夹克加羊毛衫等冬季服装。年老体弱者宜着厚棉衣、冬大衣或厚羽绒服。","uv_index":"最弱","comfort_index":"","wash_index":"不宜","travel_index":"较不宜","exercise_index":"较不宜","drying_index":""},"future":{"day_20170220":{"temperature":"0℃~11℃","weather":"阴转小雨","weather_id":{"fa":"02","fb":"07"},"wind":"东北风3-4 级","week":"星期一","date":"20170220"},"day_20170221":{"temperature":"-3℃~4℃","weather":"雨夹雪转阴","weather_id":{"fa":"06","fb":"02"},"wind":"东北风微风","week":"星期二","date":"20170221"},"day_20170222":{"temperature":"-3℃~6℃","weather":"阴","weather_id":{"fa":"02","fb":"02"},"wind":"东北风微风","week":"星期三","date":"20170222"},"day_20170223":{"temperature":"0℃~6℃","weather":"多云","weather_id":{"fa":"01","fb":"01"},"wind":"东北风微风","week":"星期四","date":"20170223"},"day_20170224":{"temperature":"0℃~7℃","weather":"多云","weather_id":{"fa":"01","fb":"01"},"wind":"东北风微风","week":"星期五","date":"20170224"},"day_20170225":{"temperature":"-3℃~6℃","weather":"阴","weather_id":{"fa":"02","fb":"02"},"wind":"东北风微风","week":"星期六","date":"20170225"},"day_20170226":{"temperature":"-3℃~6℃","weather":"阴","weather_id":{"fa":"02","fb":"02"},"wind":"东北风微风","week":"星期日","date":"20170226"}}},"error_code":0}');
+  // var Weather = JSON.parse('{"resultcode":"200","reason":"successed!","result":{"sk":{"temp":"6","wind_direction":"东北风","wind_strength":"5级","humidity":"27%","time":"22:29"},"today":{"temperature":"0℃~11℃","weather":"阴转小雨","weather_id":{"fa":"02","fb":"07"},"wind":"东北风3-4 级","week":"星期一","city":"西安","date_y":"2017年02月20日","dressing_index":"冷","dressing_advice":"天气冷，建议着棉服、羽绒服、皮夹克加羊毛衫等冬季服装。年老体弱者宜着厚棉衣、冬大衣或厚羽绒服。","uv_index":"最弱","comfort_index":"","wash_index":"不宜","travel_index":"较不宜","exercise_index":"较不宜","drying_index":""},"future":{"day_20170220":{"temperature":"0℃~11℃","weather":"阴转小雨","weather_id":{"fa":"02","fb":"07"},"wind":"东北风3-4 级","week":"星期一","date":"20170220"},"day_20170221":{"temperature":"-3℃~4℃","weather":"雨夹雪转阴","weather_id":{"fa":"06","fb":"02"},"wind":"东北风微风","week":"星期二","date":"20170221"},"day_20170222":{"temperature":"-3℃~6℃","weather":"阴","weather_id":{"fa":"02","fb":"02"},"wind":"东北风微风","week":"星期三","date":"20170222"},"day_20170223":{"temperature":"0℃~6℃","weather":"多云","weather_id":{"fa":"01","fb":"01"},"wind":"东北风微风","week":"星期四","date":"20170223"},"day_20170224":{"temperature":"0℃~7℃","weather":"多云","weather_id":{"fa":"01","fb":"01"},"wind":"东北风微风","week":"星期五","date":"20170224"},"day_20170225":{"temperature":"-3℃~6℃","weather":"阴","weather_id":{"fa":"02","fb":"02"},"wind":"东北风微风","week":"星期六","date":"20170225"},"day_20170226":{"temperature":"-3℃~6℃","weather":"阴","weather_id":{"fa":"02","fb":"02"},"wind":"东北风微风","week":"星期日","date":"20170226"}}},"error_code":0}');
     $("#result_fut").html('');
     $('#result_weather').html('正在查询中……');
-    console.log(Weather);
-    show(Weather);
-    // $.getJSON("http://v.juhe.cn/weather/index?callback=?", {
-    //     "cityname" : city[count],
-    //     "dtype" : "jsonp",
-    //     "key" : "488978971707864858562d990d5cf42f"
-    // }, show);
+
+
+    $.getJSON("http://v.juhe.cn/weather/index?callback=?", {
+        "cityname" : city[count],
+        "dtype" : "jsonp",
+        "key" : "488978971707864858562d990d5cf42f"
+    }, show);
   //   $.getJSON("http://op.juhe.cn/onebox/weather/query?callback=?", {
   //    "cityname" : city[count],
   //    "dtype" : "jsonp",
